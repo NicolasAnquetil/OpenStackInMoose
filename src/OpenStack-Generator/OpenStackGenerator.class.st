@@ -1,3 +1,6 @@
+"
+Generator class for the Openstack metamodel
+"
 Class {
 	#name : #OpenStackGenerator,
 	#superclass : #FamixBasicInfrastructureGenerator,
