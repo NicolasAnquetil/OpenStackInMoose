@@ -14,6 +14,16 @@ Class {
 	#category : #OpenStack
 }
 
+{ #category : #accessing }
+OpenStackGenerator class >> packageName [
+	^ #'Openstack-Entities'
+]
+
+{ #category : #accessing }
+OpenStackGenerator class >> prefix [
+	^ #'FamixOpenstack'
+]
+
 { #category : #definition }
 OpenStackGenerator >> defineClasses [
 	super defineClasses.
