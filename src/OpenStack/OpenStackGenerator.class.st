@@ -1,6 +1,6 @@
 Class {
 	#name : #OpenStackGenerator,
-	#superclass : #FamixMetamodelGenerator,
+	#superclass : #FamixBasicInfrastructureGenerator,
 	#instVars : [
 		'resource',
 		'map',
