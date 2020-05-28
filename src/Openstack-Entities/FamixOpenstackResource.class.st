@@ -2,9 +2,9 @@ Class {
 	#name : #FamixOpenstackResource,
 	#superclass : #FamixOpenstackComplexEntity,
 	#instVars : [
-		'#status => FMProperty',
 		'#abstract => FMProperty',
-		'#attributes => FMMany type: #FamixOpenstackProperty opposite: #parentEntity'
+		'#attributes => FMMany type: #FamixOpenstackAttribute opposite: #parentEntity',
+		'#status => FMProperty'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -41,7 +41,7 @@ FamixOpenstackResource >> addAttribute: anObject [
 
 { #category : #accessing }
 FamixOpenstackResource >> attributes [
-	"Relation named: #attributes type: #FamixOpenstackProperty opposite: #parentEntity"
+	"Relation named: #attributes type: #FamixOpenstackAttribute opposite: #parentEntity"
 
 	<generated>
 	<FMComment: 'All the Attributes of the Resource'>

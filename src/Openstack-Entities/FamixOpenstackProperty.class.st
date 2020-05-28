@@ -37,7 +37,7 @@ FamixOpenstackProperty >> parentEntity [
 	"Relation named: #parentEntity type: #FamixOpenstackComplexEntity opposite: #properties"
 
 	<generated>
-	<FMComment: 'Resource owning this Attribute'>
+	<FMComment: 'ComplexEntity owning this property'>
 	^ parentEntity
 ]
 
