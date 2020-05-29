@@ -16,7 +16,7 @@ OSAbstractTest >> create: aClass named: aString [
 ]
 
 { #category : #running }
-OSAbstractTest >> setUp [
+OSAbstractTest >> createExampleModel [
 	| package |
 	model := FamixOpenstackModel new.
 
@@ -25,11 +25,13 @@ OSAbstractTest >> setUp [
 		parentPackage: package ;
 		yourself.
 		
-	self setUpMeteringRuleIn: package.
+	self createMeteringRuleIn: package.
+	
+	^model
 ]
 
 { #category : #running }
-OSAbstractTest >> setUpMeteringLabel [
+OSAbstractTest >> createMeteringLabel [
 	| resource |
 	resource := self create: FamixOpenstackResource named: 'MeteringLabel'.
 
@@ -55,7 +57,7 @@ OSAbstractTest >> setUpMeteringLabel [
 ]
 
 { #category : #running }
-OSAbstractTest >> setUpMeteringRuleIn: package [
+OSAbstractTest >> createMeteringRuleIn: package [
 	| resource prop resource2 |
 	resource := (self create: FamixOpenstackResource named: 'MeteringRule')
 		parentPackage: package ;
@@ -77,7 +79,7 @@ OSAbstractTest >> setUpMeteringRuleIn: package [
 		parentEntity: resource ;
 		mandatory: false.
 
-	resource2 := self setUpMeteringLabel
+	resource2 := self createMeteringLabel
 		parentPackage: package ;
 		yourself.
 
@@ -94,6 +96,11 @@ OSAbstractTest >> setUpMeteringRuleIn: package [
 
 	^resource 
 
+]
+
+{ #category : #running }
+OSAbstractTest >> setUp [
+	self createExampleModel
 ]
 
 { #category : #tests }
