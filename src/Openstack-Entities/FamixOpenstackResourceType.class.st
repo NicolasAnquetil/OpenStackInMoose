@@ -44,6 +44,12 @@ FamixOpenstackResourceType >> addAttribute: anObject [
 ]
 
 { #category : #adding }
+FamixOpenstackResourceType >> addFeature: anObject [
+	<generated>
+	^ self features add: anObject
+]
+
+{ #category : #adding }
 FamixOpenstackResourceType >> addProperty: anObject [
 	<generated>
 	^ self properties add: anObject
@@ -90,6 +96,22 @@ FamixOpenstackResourceType >> description [
 FamixOpenstackResourceType >> description: anObject [
 	<generated>
 	description := anObject
+]
+
+{ #category : #accessing }
+FamixOpenstackResourceType >> features [
+	"Relation named: #features type: #FamixOpenstackFeature opposite: #entity"
+
+	<generated>
+	<derived>
+	^ features
+]
+
+{ #category : #accessing }
+FamixOpenstackResourceType >> features: anObject [
+
+	<generated>
+	features value: anObject
 ]
 
 { #category : #accessing }

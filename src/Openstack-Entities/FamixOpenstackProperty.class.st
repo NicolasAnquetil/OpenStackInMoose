@@ -49,6 +49,21 @@ FamixOpenstackProperty >> immutable: anObject [
 ]
 
 { #category : #accessing }
+FamixOpenstackProperty >> parentFeature [
+	"Relation named: #parentFeature type: #FamixOpenstackFeature opposite: #schemas"
+
+	<generated>
+	^ parentFeature
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> parentFeature: anObject [
+
+	<generated>
+	parentFeature := anObject
+]
+
+{ #category : #accessing }
 FamixOpenstackProperty >> parentResource [
 	"Relation named: #parentResource type: #FamixOpenstackResourceType opposite: #properties"
 
@@ -83,6 +98,20 @@ FamixOpenstackProperty >> required [
 FamixOpenstackProperty >> required: anObject [
 	<generated>
 	required := anObject
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> updateAllowed [
+
+	<FMProperty: #updateAllowed type: #Boolean>
+	<generated>
+	^ updateAllowed
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> updateAllowed: anObject [
+	<generated>
+	updateAllowed := anObject
 ]
 
 { #category : #accessing }

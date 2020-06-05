@@ -17,6 +17,21 @@ FamixOpenstackConstraint class >> annotation [
 ]
 
 { #category : #accessing }
+FamixOpenstackConstraint >> constrainedFeature [
+	"Relation named: #constrainedFeature type: #FamixOpenstackFeature opposite: #constraints"
+
+	<generated>
+	^ constrainedFeature
+]
+
+{ #category : #accessing }
+FamixOpenstackConstraint >> constrainedFeature: anObject [
+
+	<generated>
+	constrainedFeature := anObject
+]
+
+{ #category : #accessing }
 FamixOpenstackConstraint >> description [
 
 	<FMProperty: #description type: #String>

@@ -22,6 +22,22 @@ FamixOpenstackSupportStatus class >> annotation [
 ]
 
 { #category : #accessing }
+FamixOpenstackSupportStatus >> feature [
+	"Relation named: #feature type: #FamixOpenstackFeature opposite: #supportStatus"
+
+	<generated>
+	<derived>
+	^ feature
+]
+
+{ #category : #accessing }
+FamixOpenstackSupportStatus >> feature: anObject [
+
+	<generated>
+	feature := anObject
+]
+
+{ #category : #accessing }
 FamixOpenstackSupportStatus >> message [
 
 	<FMProperty: #message type: #String>

@@ -20,9 +20,9 @@ OSAbstractTest >> createExampleModel [
 	| package |
 	model := FamixOpenstackModel new.
 
-	package := self create: FamixOpenstackPackage named: 'OS'.
-	package := (self create: FamixOpenstackPackage named: 'Neutron')
-		parentPackage: package ;
+	package := self create: FamixOpenstackService named: 'OS'.
+	package := (self create: FamixOpenstackService named: 'Neutron')
+		parentService: package ;
 		yourself.
 		
 	self createMeteringRuleIn: package.
@@ -33,24 +33,24 @@ OSAbstractTest >> createExampleModel [
 { #category : #running }
 OSAbstractTest >> createMeteringLabel [
 	| resource |
-	resource := self create: FamixOpenstackResource named: 'MeteringLabel'.
+	resource := self create: FamixOpenstackResourceType named: 'MeteringLabel'.
 
 	(self create: FamixOpenstackAttribute named: 'description')
-		parentEntity: resource.
+		parentResource: resource.
 	(self create: FamixOpenstackAttribute named: 'name')
-		parentEntity: resource.
+		parentResource: resource.
 	(self create: FamixOpenstackAttribute named: 'shared')
-		parentEntity: resource.
+		parentResource: resource.
 
 	(self create: FamixOpenstackProperty named: 'description')
-		parentEntity: resource ;
-		mandatory: false.
+		parentResource: resource ;
+		required: false.
 	(self create: FamixOpenstackProperty named: 'name')
-		parentEntity: resource ;
-		mandatory: false.
+		parentResource: resource ;
+		required: false.
 	(self create: FamixOpenstackProperty named: 'shared')
-		parentEntity: resource ;
-		mandatory: false.
+		parentResource: resource ;
+		required: false.
 		
 	^resource 
 
@@ -58,43 +58,43 @@ OSAbstractTest >> createMeteringLabel [
 
 { #category : #running }
 OSAbstractTest >> createMeteringRuleIn: package [
-	| resource prop resource2 |
-	resource := (self create: FamixOpenstackResource named: 'MeteringRule')
-		parentPackage: package ;
+	| ruleResource prop labelResource |
+	ruleResource := (self create: FamixOpenstackResourceType named: 'MeteringRule')
+		parentService: package ;
 		yourself.
 
 	(self create: FamixOpenstackAttribute named: 'direction')
-		parentEntity: resource.
+		parentResource: ruleResource.
 	(self create: FamixOpenstackAttribute named: 'excluded')
-		parentEntity: resource.
+		parentResource: ruleResource.
 	(self create: FamixOpenstackAttribute named: 'metering_label_id')
-		parentEntity: resource.
+		parentResource: ruleResource.
 	(self create: FamixOpenstackAttribute named: 'remote_ip_prefix')
-		parentEntity: resource.
+		parentResource: ruleResource.
 
 	(self create: FamixOpenstackProperty named: 'direction')
-		parentEntity: resource ;
-		mandatory: false.
+		parentResource: ruleResource ;
+		required: false.
 	(self create: FamixOpenstackProperty named: 'excluded')
-		parentEntity: resource ;
-		mandatory: false.
+		parentResource: ruleResource ;
+		required: false.
 
-	resource2 := self createMeteringLabel
-		parentPackage: package ;
+	labelResource := self createMeteringLabel
+		parentService: package ;
 		yourself.
 
 	prop := (self create: FamixOpenstackProperty named: 'metering_label_id')
-		parentEntity: resource ;
-		referredEntity: resource2 ;
-		mandatory: true ;
+		parentResource: ruleResource ;
+		entity: labelResource ;
+		required: true ;
 		yourself.
 	prop := (self create: FamixOpenstackProperty named: 'remote_id_prefix')
-		parentEntity: resource ;
-		referredEntity: resource2 ;
-		mandatory: true ;
+		parentResource: ruleResource ;
+		entity: labelResource ;
+		required: true ;
 		yourself.
 
-	^resource 
+	^ruleResource 
 
 ]
 
@@ -105,9 +105,8 @@ OSAbstractTest >> setUp [
 
 { #category : #tests }
 OSAbstractTest >> testModelEntitiesCount [
-	self assert: (model allWithType: FamixOpenstackPackage) size equals: 2.
-	self assert: (model allWithType: FamixOpenstackResource) size equals: 2.
-	self assert: (model allWithType: FamixOpenstackMap) size equals: 0.
+	self assert: (model allWithType: FamixOpenstackService) size equals: 2.
+	self assert: (model allWithType: FamixOpenstackResourceType) size equals: 2.
 	self assert: (model allWithType: FamixOpenstackAttribute) size equals: 7.
 	self assert: (model allWithType: FamixOpenstackProperty) size equals: 7.
 ]
@@ -118,12 +117,12 @@ OSAbstractTest >> testModelEntitiesOwnership [
 	entity := model entityNamed: 'OS'.
 	
 	self assert: entity isNotNil.
-	self assert: entity childrenPackages size equals: 1.
+	self assert: entity subServices size equals: 1.
 	
-	entity := entity childrenPackages first.
+	entity := entity subServices first.
 	self assert: entity name equals: 'Neutron'.
-	self assert: entity childrenPackages size equals: 0.
-	self assert: entity childrenEntities size equals: 2.
+	self assert: entity subServices size equals: 0.
+	self assert: entity resourceTypes size equals: 2.
 	
 
 ]
@@ -138,12 +137,12 @@ OSAbstractTest >> testModelEntitiesRelationship [
 	self assert: label isNotNil.
 	
 	prop := rule properties detect: [ :p | p name = 'metering_label_id' ].
-	self assert: prop referredEntity equals: label.
-	self assert: (label referringFunctionalities includes: prop).
+	self assert: prop entity equals: label.
+	self assert: (label features includes: prop).
 
 	prop := rule properties detect: [ :p | p name = 'remote_id_prefix' ].
-	self assert: prop referredEntity equals: label.
-	self assert: (label referringFunctionalities includes: prop).
+	self assert: prop entity equals: label.
+	self assert: (label features includes: prop).
 
 ]
 
