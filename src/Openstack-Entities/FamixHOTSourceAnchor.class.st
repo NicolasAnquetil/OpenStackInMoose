@@ -1,15 +1,15 @@
 Class {
-	#name : #FamixOpenstackSourceAnchor,
-	#superclass : #FamixOpenstackEntity,
+	#name : #FamixHOTSourceAnchor,
+	#superclass : #FamixHOTEntity,
 	#traits : 'FamixTSourceAnchor',
 	#classTraits : 'FamixTSourceAnchor classTrait',
 	#category : #'Openstack-Entities-Entities'
 }
 
 { #category : #meta }
-FamixOpenstackSourceAnchor class >> annotation [
+FamixHOTSourceAnchor class >> annotation [
 
-	<FMClass: #SourceAnchor super: #FamixOpenstackEntity>
+	<FMClass: #SourceAnchor super: #FamixHOTEntity>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self

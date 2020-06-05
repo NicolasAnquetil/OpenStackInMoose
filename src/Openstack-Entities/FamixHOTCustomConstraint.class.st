@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixOpenstackCustomConstraint,
-	#superclass : #FamixOpenstackConstraint,
+	#name : #FamixHOTCustomConstraint,
+	#superclass : #FamixHOTConstraint,
 	#instVars : [
 		'#name => FMProperty'
 	],
@@ -8,16 +8,16 @@ Class {
 }
 
 { #category : #meta }
-FamixOpenstackCustomConstraint class >> annotation [
+FamixHOTCustomConstraint class >> annotation [
 
-	<FMClass: #CustomConstraint super: #FamixOpenstackConstraint>
+	<FMClass: #CustomConstraint super: #FamixHOTConstraint>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixOpenstackCustomConstraint >> name [
+FamixHOTCustomConstraint >> name [
 
 	<FMProperty: #name type: #String>
 	<generated>
@@ -25,7 +25,7 @@ FamixOpenstackCustomConstraint >> name [
 ]
 
 { #category : #accessing }
-FamixOpenstackCustomConstraint >> name: anObject [
+FamixHOTCustomConstraint >> name: anObject [
 	<generated>
 	name := anObject
 ]

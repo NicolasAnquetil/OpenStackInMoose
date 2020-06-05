@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixOpenstackAllowedPattern,
-	#superclass : #FamixOpenstackConstraint,
+	#name : #FamixHOTAllowedPattern,
+	#superclass : #FamixHOTConstraint,
 	#instVars : [
 		'#pattern => FMProperty'
 	],
@@ -8,16 +8,16 @@ Class {
 }
 
 { #category : #meta }
-FamixOpenstackAllowedPattern class >> annotation [
+FamixHOTAllowedPattern class >> annotation [
 
-	<FMClass: #AllowedPattern super: #FamixOpenstackConstraint>
+	<FMClass: #AllowedPattern super: #FamixHOTConstraint>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixOpenstackAllowedPattern >> pattern [
+FamixHOTAllowedPattern >> pattern [
 
 	<FMProperty: #pattern type: #String>
 	<generated>
@@ -25,7 +25,7 @@ FamixOpenstackAllowedPattern >> pattern [
 ]
 
 { #category : #accessing }
-FamixOpenstackAllowedPattern >> pattern: anObject [
+FamixHOTAllowedPattern >> pattern: anObject [
 	<generated>
 	pattern := anObject
 ]

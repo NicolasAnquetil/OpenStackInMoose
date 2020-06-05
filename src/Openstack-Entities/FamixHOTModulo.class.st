@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixOpenstackModulo,
-	#superclass : #FamixOpenstackConstraint,
+	#name : #FamixHOTModulo,
+	#superclass : #FamixHOTConstraint,
 	#instVars : [
 		'#step => FMProperty',
 		'#offset => FMProperty'
@@ -9,16 +9,16 @@ Class {
 }
 
 { #category : #meta }
-FamixOpenstackModulo class >> annotation [
+FamixHOTModulo class >> annotation [
 
-	<FMClass: #Modulo super: #FamixOpenstackConstraint>
+	<FMClass: #Modulo super: #FamixHOTConstraint>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixOpenstackModulo >> offset [
+FamixHOTModulo >> offset [
 
 	<FMProperty: #offset type: #Number>
 	<generated>
@@ -26,13 +26,13 @@ FamixOpenstackModulo >> offset [
 ]
 
 { #category : #accessing }
-FamixOpenstackModulo >> offset: anObject [
+FamixHOTModulo >> offset: anObject [
 	<generated>
 	offset := anObject
 ]
 
 { #category : #accessing }
-FamixOpenstackModulo >> step [
+FamixHOTModulo >> step [
 
 	<FMProperty: #step type: #Number>
 	<generated>
@@ -40,7 +40,7 @@ FamixOpenstackModulo >> step [
 ]
 
 { #category : #accessing }
-FamixOpenstackModulo >> step: anObject [
+FamixHOTModulo >> step: anObject [
 	<generated>
 	step := anObject
 ]

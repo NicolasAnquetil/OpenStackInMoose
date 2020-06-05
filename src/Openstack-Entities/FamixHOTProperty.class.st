@@ -1,28 +1,28 @@
 Class {
-	#name : #FamixOpenstackProperty,
-	#superclass : #FamixOpenstackFeature,
+	#name : #FamixHOTProperty,
+	#superclass : #FamixHOTFeature,
 	#instVars : [
 		'#default => FMProperty',
 		'#immutable => FMProperty',
-		'#parentFeature => FMOne type: #FamixOpenstackFeature opposite: #schemas',
-		'#parentResource => FMOne type: #FamixOpenstackResourceType opposite: #properties',
 		'#required => FMProperty',
-		'#update_allowed => FMProperty'
+		'#update_allowed => FMProperty',
+		'#parentResource => FMOne type: #FamixHOTResourceType opposite: #properties',
+		'#parentFeature => FMOne type: #FamixHOTFeature opposite: #schemas'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
 
 { #category : #meta }
-FamixOpenstackProperty class >> annotation [
+FamixHOTProperty class >> annotation [
 
-	<FMClass: #Property super: #FamixOpenstackFeature>
+	<FMClass: #Property super: #FamixHOTFeature>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> default [
+FamixHOTProperty >> default [
 
 	<FMProperty: #default type: #Object>
 	<generated>
@@ -30,13 +30,13 @@ FamixOpenstackProperty >> default [
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> default: anObject [
+FamixHOTProperty >> default: anObject [
 	<generated>
 	default := anObject
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> immutable [
+FamixHOTProperty >> immutable [
 
 	<FMProperty: #immutable type: #Boolean>
 	<generated>
@@ -44,29 +44,29 @@ FamixOpenstackProperty >> immutable [
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> immutable: anObject [
+FamixHOTProperty >> immutable: anObject [
 	<generated>
 	immutable := anObject
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> parentFeature [
-	"Relation named: #parentFeature type: #FamixOpenstackFeature opposite: #schemas"
+FamixHOTProperty >> parentFeature [
+	"Relation named: #parentFeature type: #FamixHOTFeature opposite: #schemas"
 
 	<generated>
 	^ parentFeature
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> parentFeature: anObject [
+FamixHOTProperty >> parentFeature: anObject [
 
 	<generated>
 	parentFeature := anObject
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> parentResource [
-	"Relation named: #parentResource type: #FamixOpenstackResourceType opposite: #properties"
+FamixHOTProperty >> parentResource [
+	"Relation named: #parentResource type: #FamixHOTResourceType opposite: #properties"
 
 	<generated>
 	<container>
@@ -74,21 +74,21 @@ FamixOpenstackProperty >> parentResource [
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> parentResource: anObject [
+FamixHOTProperty >> parentResource: anObject [
 
 	<generated>
 	parentResource := anObject
 ]
 
 { #category : #navigation }
-FamixOpenstackProperty >> parentResourceGroup [
+FamixHOTProperty >> parentResourceGroup [
 	<generated>
 	<navigation: 'ParentResource'>
 	^ MooseGroup with: self parentResource
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> required [
+FamixHOTProperty >> required [
 
 	<FMProperty: #required type: #Boolean>
 	<generated>
@@ -96,13 +96,13 @@ FamixOpenstackProperty >> required [
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> required: anObject [
+FamixHOTProperty >> required: anObject [
 	<generated>
 	required := anObject
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> update_allowed [
+FamixHOTProperty >> update_allowed [
 
 	<FMProperty: #update_allowed type: #Boolean>
 	<generated>
@@ -110,7 +110,7 @@ FamixOpenstackProperty >> update_allowed [
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> update_allowed: anObject [
+FamixHOTProperty >> update_allowed: anObject [
 	<generated>
 	update_allowed := anObject
 ]

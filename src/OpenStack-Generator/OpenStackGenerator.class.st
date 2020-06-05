@@ -30,7 +30,7 @@ OpenStackGenerator class >> packageName [
 
 { #category : #accessing }
 OpenStackGenerator class >> prefix [
-	^ #'FamixOpenstack'
+	^ #'FamixHOT'
 ]
 
 { #category : #definition }

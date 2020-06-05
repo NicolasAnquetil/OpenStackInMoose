@@ -1,6 +1,6 @@
 Class {
-	#name : #FamixOpenstackLength,
-	#superclass : #FamixOpenstackConstraint,
+	#name : #FamixHOTLength,
+	#superclass : #FamixHOTConstraint,
 	#instVars : [
 		'#min => FMProperty',
 		'#max => FMProperty'
@@ -9,16 +9,16 @@ Class {
 }
 
 { #category : #meta }
-FamixOpenstackLength class >> annotation [
+FamixHOTLength class >> annotation [
 
-	<FMClass: #Length super: #FamixOpenstackConstraint>
+	<FMClass: #Length super: #FamixHOTConstraint>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixOpenstackLength >> max [
+FamixHOTLength >> max [
 
 	<FMProperty: #max type: #Number>
 	<generated>
@@ -26,13 +26,13 @@ FamixOpenstackLength >> max [
 ]
 
 { #category : #accessing }
-FamixOpenstackLength >> max: anObject [
+FamixHOTLength >> max: anObject [
 	<generated>
 	max := anObject
 ]
 
 { #category : #accessing }
-FamixOpenstackLength >> min [
+FamixHOTLength >> min [
 
 	<FMProperty: #min type: #Number>
 	<generated>
@@ -40,7 +40,7 @@ FamixOpenstackLength >> min [
 ]
 
 { #category : #accessing }
-FamixOpenstackLength >> min: anObject [
+FamixHOTLength >> min: anObject [
 	<generated>
 	min := anObject
 ]

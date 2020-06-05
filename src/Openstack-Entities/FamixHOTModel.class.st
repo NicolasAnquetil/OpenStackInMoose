@@ -1,18 +1,18 @@
 Class {
-	#name : #FamixOpenstackModel,
+	#name : #FamixHOTModel,
 	#superclass : #MooseModel,
 	#category : #'Openstack-Entities-Model'
 }
 
 { #category : #accessing }
-FamixOpenstackModel class >> allSubmetamodelsPackagesNames [
+FamixHOTModel class >> allSubmetamodelsPackagesNames [
 	<generated>
 	^ #(#'Moose-Query' #'Famix-Traits')
 ]
 
 { #category : #meta }
-FamixOpenstackModel class >> annotation [
-	<FMClass: #FamixOpenstackModel super: #MooseModel>
+FamixHOTModel class >> annotation [
+	<FMClass: #FamixHOTModel super: #MooseModel>
 	<package: #'Openstack-Entities'>
 	<generated>
 ]

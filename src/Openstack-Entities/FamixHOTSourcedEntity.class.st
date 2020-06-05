@@ -1,15 +1,15 @@
 Class {
-	#name : #FamixOpenstackSourcedEntity,
-	#superclass : #FamixOpenstackEntity,
+	#name : #FamixHOTSourcedEntity,
+	#superclass : #FamixHOTEntity,
 	#traits : 'FamixTSourceEntity + FamixTWithComments',
 	#classTraits : 'FamixTSourceEntity classTrait + FamixTWithComments classTrait',
 	#category : #'Openstack-Entities-Entities'
 }
 
 { #category : #meta }
-FamixOpenstackSourcedEntity class >> annotation [
+FamixHOTSourcedEntity class >> annotation [
 
-	<FMClass: #SourcedEntity super: #FamixOpenstackEntity>
+	<FMClass: #SourcedEntity super: #FamixHOTEntity>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self

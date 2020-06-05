@@ -18,10 +18,10 @@ OSAbstractTest >> create: aClass named: aString [
 { #category : #running }
 OSAbstractTest >> createExampleModel [
 	| package |
-	model := FamixOpenstackModel new.
+	model := FamixHOTModel new.
 
-	package := self create: FamixOpenstackService named: 'OS'.
-	package := (self create: FamixOpenstackService named: 'Neutron')
+	package := self create: FamixHOTService named: 'OS'.
+	package := (self create: FamixHOTService named: 'Neutron')
 		parentService: package ;
 		yourself.
 		
@@ -33,22 +33,22 @@ OSAbstractTest >> createExampleModel [
 { #category : #running }
 OSAbstractTest >> createMeteringLabel [
 	| resource |
-	resource := self create: FamixOpenstackResourceType named: 'MeteringLabel'.
+	resource := self create: FamixHOTResourceType named: 'MeteringLabel'.
 
-	(self create: FamixOpenstackAttribute named: 'description')
+	(self create: FamixHOTAttribute named: 'description')
 		parentResource: resource.
-	(self create: FamixOpenstackAttribute named: 'name')
+	(self create: FamixHOTAttribute named: 'name')
 		parentResource: resource.
-	(self create: FamixOpenstackAttribute named: 'shared')
+	(self create: FamixHOTAttribute named: 'shared')
 		parentResource: resource.
 
-	(self create: FamixOpenstackProperty named: 'description')
+	(self create: FamixHOTProperty named: 'description')
 		parentResource: resource ;
 		required: false.
-	(self create: FamixOpenstackProperty named: 'name')
+	(self create: FamixHOTProperty named: 'name')
 		parentResource: resource ;
 		required: false.
-	(self create: FamixOpenstackProperty named: 'shared')
+	(self create: FamixHOTProperty named: 'shared')
 		parentResource: resource ;
 		required: false.
 		
@@ -59,23 +59,23 @@ OSAbstractTest >> createMeteringLabel [
 { #category : #running }
 OSAbstractTest >> createMeteringRuleIn: package [
 	| ruleResource prop labelResource |
-	ruleResource := (self create: FamixOpenstackResourceType named: 'MeteringRule')
+	ruleResource := (self create: FamixHOTResourceType named: 'MeteringRule')
 		parentService: package ;
 		yourself.
 
-	(self create: FamixOpenstackAttribute named: 'direction')
+	(self create: FamixHOTAttribute named: 'direction')
 		parentResource: ruleResource.
-	(self create: FamixOpenstackAttribute named: 'excluded')
+	(self create: FamixHOTAttribute named: 'excluded')
 		parentResource: ruleResource.
-	(self create: FamixOpenstackAttribute named: 'metering_label_id')
+	(self create: FamixHOTAttribute named: 'metering_label_id')
 		parentResource: ruleResource.
-	(self create: FamixOpenstackAttribute named: 'remote_ip_prefix')
+	(self create: FamixHOTAttribute named: 'remote_ip_prefix')
 		parentResource: ruleResource.
 
-	(self create: FamixOpenstackProperty named: 'direction')
+	(self create: FamixHOTProperty named: 'direction')
 		parentResource: ruleResource ;
 		required: false.
-	(self create: FamixOpenstackProperty named: 'excluded')
+	(self create: FamixHOTProperty named: 'excluded')
 		parentResource: ruleResource ;
 		required: false.
 
@@ -83,12 +83,12 @@ OSAbstractTest >> createMeteringRuleIn: package [
 		parentService: package ;
 		yourself.
 
-	prop := (self create: FamixOpenstackProperty named: 'metering_label_id')
+	prop := (self create: FamixHOTProperty named: 'metering_label_id')
 		parentResource: ruleResource ;
 		entity: labelResource ;
 		required: true ;
 		yourself.
-	prop := (self create: FamixOpenstackProperty named: 'remote_id_prefix')
+	prop := (self create: FamixHOTProperty named: 'remote_id_prefix')
 		parentResource: ruleResource ;
 		entity: labelResource ;
 		required: true ;
@@ -105,10 +105,10 @@ OSAbstractTest >> setUp [
 
 { #category : #tests }
 OSAbstractTest >> testModelEntitiesCount [
-	self assert: (model allWithType: FamixOpenstackService) size equals: 2.
-	self assert: (model allWithType: FamixOpenstackResourceType) size equals: 2.
-	self assert: (model allWithType: FamixOpenstackAttribute) size equals: 7.
-	self assert: (model allWithType: FamixOpenstackProperty) size equals: 7.
+	self assert: (model allWithType: FamixHOTService) size equals: 2.
+	self assert: (model allWithType: FamixHOTResourceType) size equals: 2.
+	self assert: (model allWithType: FamixHOTAttribute) size equals: 7.
+	self assert: (model allWithType: FamixHOTProperty) size equals: 7.
 ]
 
 { #category : #tests }

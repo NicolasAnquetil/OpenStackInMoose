@@ -1,11 +1,11 @@
 Class {
-	#name : #FamixOpenstackEntity,
+	#name : #FamixHOTEntity,
 	#superclass : #MooseEntity,
 	#category : #'Openstack-Entities-Entities'
 }
 
 { #category : #meta }
-FamixOpenstackEntity class >> annotation [
+FamixHOTEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
 	<package: #'Openstack-Entities'>
@@ -14,8 +14,8 @@ FamixOpenstackEntity class >> annotation [
 ]
 
 { #category : #meta }
-FamixOpenstackEntity class >> metamodel [
+FamixHOTEntity class >> metamodel [
 
 	<generated>
-	^ FamixOpenstackModel metamodel
+	^ FamixHOTModel metamodel
 ]

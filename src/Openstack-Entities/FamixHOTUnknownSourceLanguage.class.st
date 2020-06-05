@@ -1,15 +1,15 @@
 Class {
-	#name : #FamixOpenstackUnknownSourceLanguage,
-	#superclass : #FamixOpenstackSourceLanguage,
+	#name : #FamixHOTUnknownSourceLanguage,
+	#superclass : #FamixHOTSourceLanguage,
 	#traits : 'FamixTUnknownSourceLanguage',
 	#classTraits : 'FamixTUnknownSourceLanguage classTrait',
 	#category : #'Openstack-Entities-Entities'
 }
 
 { #category : #meta }
-FamixOpenstackUnknownSourceLanguage class >> annotation [
+FamixHOTUnknownSourceLanguage class >> annotation [
 
-	<FMClass: #UnknownSourceLanguage super: #FamixOpenstackSourceLanguage>
+	<FMClass: #UnknownSourceLanguage super: #FamixHOTSourceLanguage>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
