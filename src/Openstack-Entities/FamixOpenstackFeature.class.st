@@ -4,7 +4,11 @@ Class {
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
+		'#constraints => FMMany type: #FamixOpenstackConstraint opposite: #constrainedFeature',
 		'#description => FMProperty',
+		'#entity => FMOne type: #FamixOpenstackResourceType opposite: #features',
+		'#schemas => FMMany type: #FamixOpenstackProperty opposite: #parentFeature',
+		'#supportStatus => FMOne type: #FamixOpenstackSupportStatus opposite: #feature',
 		'#type => FMProperty'
 	],
 	#category : #'Openstack-Entities-Entities'

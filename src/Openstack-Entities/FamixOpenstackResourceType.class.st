@@ -4,10 +4,11 @@ Class {
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
-		'#description => FMProperty',
 		'#abstract => FMProperty',
-		'#parentService => FMOne type: #FamixOpenstackService opposite: #resourceTypes',
 		'#attributes => FMMany type: #FamixOpenstackAttribute opposite: #parentResource',
+		'#description => FMProperty',
+		'#features => FMMany type: #FamixOpenstackFeature opposite: #entity',
+		'#parentService => FMOne type: #FamixOpenstackService opposite: #resourceTypes',
 		'#properties => FMMany type: #FamixOpenstackProperty opposite: #parentResource',
 		'#supportStatus => FMMany type: #FamixOpenstackSupportStatus opposite: #resourceType'
 	],

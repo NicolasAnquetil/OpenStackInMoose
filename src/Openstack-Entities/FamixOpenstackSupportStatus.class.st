@@ -2,12 +2,13 @@ Class {
 	#name : #FamixOpenstackSupportStatus,
 	#superclass : #FamixOpenstackHotEntity,
 	#instVars : [
+		'#feature => FMOne type: #FamixOpenstackFeature opposite: #supportStatus',
 		'#message => FMProperty',
-		'#version => FMProperty',
-		'#status => FMProperty',
-		'#resourceType => FMOne type: #FamixOpenstackResourceType opposite: #supportStatus',
+		'#nextstatus => FMOne type: #FamixOpenstackSupportStatus opposite: #previousStatus',
 		'#previousStatus => FMOne type: #FamixOpenstackSupportStatus opposite: #nextstatus',
-		'#nextstatus => FMOne type: #FamixOpenstackSupportStatus opposite: #previousStatus'
+		'#resourceType => FMOne type: #FamixOpenstackResourceType opposite: #supportStatus',
+		'#status => FMProperty',
+		'#version => FMProperty'
 	],
 	#category : #'Openstack-Entities-Entities'
 }

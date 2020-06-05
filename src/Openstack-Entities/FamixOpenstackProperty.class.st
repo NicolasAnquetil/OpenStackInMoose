@@ -4,9 +4,10 @@ Class {
 	#instVars : [
 		'#default => FMProperty',
 		'#immutable => FMProperty',
+		'#parentFeature => FMOne type: #FamixOpenstackFeature opposite: #schemas',
+		'#parentResource => FMOne type: #FamixOpenstackResourceType opposite: #properties',
 		'#required => FMProperty',
-		'#update_allowed => FMProperty',
-		'#parentResource => FMOne type: #FamixOpenstackResourceType opposite: #properties'
+		'#update_allowed => FMProperty'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -98,20 +99,6 @@ FamixOpenstackProperty >> required [
 FamixOpenstackProperty >> required: anObject [
 	<generated>
 	required := anObject
-]
-
-{ #category : #accessing }
-FamixOpenstackProperty >> updateAllowed [
-
-	<FMProperty: #updateAllowed type: #Boolean>
-	<generated>
-	^ updateAllowed
-]
-
-{ #category : #accessing }
-FamixOpenstackProperty >> updateAllowed: anObject [
-	<generated>
-	updateAllowed := anObject
 ]
 
 { #category : #accessing }
