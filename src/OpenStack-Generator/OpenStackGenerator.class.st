@@ -5,14 +5,20 @@ Class {
 	#name : #OpenStackGenerator,
 	#superclass : #FamixBasicInfrastructureGenerator,
 	#instVars : [
-		'resource',
-		'map',
-		'property',
+		'hotEntity',
+		'service',
+		'resourceType',
+		'supportStatus',
+		'feature',
 		'attribute',
-		'functionality',
-		'openStackEntity',
-		'complexEntity',
-		'package'
+		'range',
+		'property',
+		'constraint',
+		'length',
+		'modulo',
+		'allowedValues',
+		'allowedPattern',
+		'customConstraint'
 	],
 	#category : #'OpenStack-Generator'
 }
@@ -31,34 +37,46 @@ OpenStackGenerator class >> prefix [
 OpenStackGenerator >> defineClasses [
 	super defineClasses.
 
-	openStackEntity  := builder newClassNamed: #OpenStackEntity.
-	
-	complexEntity := builder newClassNamed: #ComplexEntity.
-	package := builder newClassNamed: #Package.
-	resource := builder newClassNamed: #Resource.
-	map := builder newClassNamed: #Map.
-	
-	functionality := builder newClassNamed: #Functionality.
-	property := builder newClassNamed: #Property.
+	hotEntity := builder newClassNamed: #HotEntity.
+
+	service := builder newClassNamed: #Service.
+	resourceType := builder newClassNamed: #ResourceType.
+	supportStatus := builder newClassNamed: #SupportStatus.
+	feature := builder newClassNamed: #Feature.
 	attribute := builder newClassNamed: #Attribute.
+	property := builder newClassNamed: #Property.
+	constraint := builder newClassNamed: #Constraint.
+	range := builder newClassNamed: #Range.
+	length := builder newClassNamed: #Length.
+	modulo := builder newClassNamed: #Modulo.
+	allowedValues := builder newClassNamed: #AllowedValues.
+	allowedPattern := builder newClassNamed: #AllowedPattern.
+	customConstraint := builder newClassNamed: #CustomConstraint.
+
 ]
 
 { #category : #definition }
 OpenStackGenerator >> defineHierarchy [
 	super defineHierarchy.
+
+	service --|> hotEntity.
+	service  --|> #TNamedEntity.
+	supportStatus --|> hotEntity.
+	resourceType --|> hotEntity.
+	resourceType  --|> #TNamedEntity.
+	feature --|> hotEntity.
+	feature  --|> #TNamedEntity.
+	constraint --|> hotEntity.
+
+	attribute --|> feature.
+	property --|> feature.
 	
-	openStackEntity --|> #TNamedEntity.
-
-	package --|> openStackEntity.
-
-	complexEntity --|> openStackEntity.
-	resource --|> complexEntity.
-	map --|> complexEntity.
-
-	functionality --|> openStackEntity.
-	property --|> functionality.
-	attribute --|> functionality.
-	
+	modulo --|> constraint.
+	allowedPattern --|> constraint.
+	allowedValues --|> constraint.
+	customConstraint --|> constraint.
+	range --|> constraint.
+	length --|> constraint.
 
 ]
 
@@ -66,13 +84,38 @@ OpenStackGenerator >> defineHierarchy [
 OpenStackGenerator >> defineProperties [
 	super defineProperties.
 
-	((resource property: #status type: #String) 
-		comment: 'Three possible statuses for Resources: #supported, #unsupported, #deprecated').
-	((resource property: #abstract type: #Boolean) 
-		comment: 'Whether the resource can be instanciated or not').
+	resourceType property: #description type: #String.
+	resourceType property: #abstract type: #Boolean.
 
-	((property property: #mandatory type: #Boolean) 
-		comment: 'Whether the resource can be instanciated or not').
+	supportStatus property: #message type: #String.
+	supportStatus property: #version type: #String.
+	supportStatus property: #status type: #String.
+
+	feature property: #description type: #String.
+	feature property: #type type: #String.
+
+	property property: #default type: #Object.
+	property property: #immutable type: #Boolean.
+	property property: #required type: #Boolean.
+	property property: #update_allowed type: #Boolean.
+
+	constraint property: #description type: #String.
+
+	range property: #min type: #Number.
+	range property: #max type: #Number.
+
+	length property: #min type: #Number.
+	length property: #max type: #Number.
+
+	modulo property: #step type: #Number.
+	modulo property: #offset type: #Number.
+	
+	(allowedValues property: #allowed type: #Object)
+		multivalued.
+
+	allowedPattern property: #pattern type: #String.
+
+	customConstraint property: #name type: #String.
 
 ]
 
@@ -80,33 +123,12 @@ OpenStackGenerator >> defineProperties [
 OpenStackGenerator >> defineRelations [
 	super defineRelations.
 
-	((package property: #childrenPackages)
-		comment: 'Children packages contained in this package')
-		<>-*
-	((package property: #parentPackage)
-		comment: 'Parent package owning this Package').
+	(service property: #subServices) <>-* (service property: #parentService).
+	(service property: #resourceTypes) <>-* (resourceType property: #parentService).
 
-	((package property: #childrenEntities)
-		comment: 'Children complexEntities contained in this package')
-		<>-*
-	((complexEntity property: #parentPackage)
-		comment: 'Parent package owning this ComplexEntity').
+	(resourceType property: #attributes) <>-* (attribute property: #parentResource).
+	(resourceType property: #properties) <>-* (property property: #parentResource).
+	(resourceType property: #supportStatus) <>-* (supportStatus property: #resourceType).
 
-	((resource property: #attributes) 
-		comment: 'All the Attributes of the Resource')
-		-*
-	((attribute property: #parentEntity)
-		comment: 'Resource owning this Attribute').
-
-	((complexEntity property: #properties) 
-		comment: 'All the Properties of the Complexentity')
-		-*
-	((property property: #parentEntity)
-		comment: 'ComplexEntity owning this property').
-
-	((functionality property: #referredEntity)
-		comment: 'Optional ComplexEntity contained in this functionality')
-		*-
-	((complexEntity property: #referringFunctionalities)
-		comment: 'All Attributes or Properties that refer to this ComplexEntity').
+	(supportStatus property: #previousStatus) - (supportStatus property: #nextstatus).
 ]

@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixOpenstackAttribute,
-	#superclass : #FamixOpenstackFonctionality,
+	#superclass : #FamixOpenstackFeature,
 	#instVars : [
-		'#parentEntity => FMOne type: #FamixOpenstackResource opposite: #attributes'
+		'#parentResource => FMOne type: #FamixOpenstackResourceType opposite: #attributes'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -10,24 +10,31 @@ Class {
 { #category : #meta }
 FamixOpenstackAttribute class >> annotation [
 
-	<FMClass: #Attribute super: #FamixOpenstackFonctionality>
+	<FMClass: #Attribute super: #FamixOpenstackFeature>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixOpenstackAttribute >> parentEntity [
-	"Relation named: #parentEntity type: #FamixOpenstackResource opposite: #attributes"
+FamixOpenstackAttribute >> parentResource [
+	"Relation named: #parentResource type: #FamixOpenstackResourceType opposite: #attributes"
 
 	<generated>
-	<FMComment: 'Resource owning this Attribute'>
-	^ parentEntity
+	<container>
+	^ parentResource
 ]
 
 { #category : #accessing }
-FamixOpenstackAttribute >> parentEntity: anObject [
+FamixOpenstackAttribute >> parentResource: anObject [
 
 	<generated>
-	parentEntity := anObject
+	parentResource := anObject
+]
+
+{ #category : #navigation }
+FamixOpenstackAttribute >> parentResourceGroup [
+	<generated>
+	<navigation: 'ParentResource'>
+	^ MooseGroup with: self parentResource
 ]

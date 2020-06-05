@@ -1,9 +1,12 @@
 Class {
 	#name : #FamixOpenstackProperty,
-	#superclass : #FamixOpenstackFonctionality,
+	#superclass : #FamixOpenstackFeature,
 	#instVars : [
-		'#mandatory => FMProperty',
-		'#parentEntity => FMOne type: #FamixOpenstackComplexEntity opposite: #properties'
+		'#default => FMProperty',
+		'#immutable => FMProperty',
+		'#required => FMProperty',
+		'#update_allowed => FMProperty',
+		'#parentResource => FMOne type: #FamixOpenstackResourceType opposite: #properties'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -11,39 +14,87 @@ Class {
 { #category : #meta }
 FamixOpenstackProperty class >> annotation [
 
-	<FMClass: #Property super: #FamixOpenstackFonctionality>
+	<FMClass: #Property super: #FamixOpenstackFeature>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> mandatory [
+FamixOpenstackProperty >> default [
 
-	<FMProperty: #mandatory type: #Boolean>
+	<FMProperty: #default type: #Object>
 	<generated>
-	<FMComment: 'Whether the resource can be instanciated or not'>
-	^ mandatory
+	^ default
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> mandatory: anObject [
+FamixOpenstackProperty >> default: anObject [
 	<generated>
-	mandatory := anObject
+	default := anObject
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> parentEntity [
-	"Relation named: #parentEntity type: #FamixOpenstackComplexEntity opposite: #properties"
+FamixOpenstackProperty >> immutable [
 
+	<FMProperty: #immutable type: #Boolean>
 	<generated>
-	<FMComment: 'ComplexEntity owning this property'>
-	^ parentEntity
+	^ immutable
 ]
 
 { #category : #accessing }
-FamixOpenstackProperty >> parentEntity: anObject [
+FamixOpenstackProperty >> immutable: anObject [
+	<generated>
+	immutable := anObject
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> parentResource [
+	"Relation named: #parentResource type: #FamixOpenstackResourceType opposite: #properties"
 
 	<generated>
-	parentEntity := anObject
+	<container>
+	^ parentResource
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> parentResource: anObject [
+
+	<generated>
+	parentResource := anObject
+]
+
+{ #category : #navigation }
+FamixOpenstackProperty >> parentResourceGroup [
+	<generated>
+	<navigation: 'ParentResource'>
+	^ MooseGroup with: self parentResource
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> required [
+
+	<FMProperty: #required type: #Boolean>
+	<generated>
+	^ required
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> required: anObject [
+	<generated>
+	required := anObject
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> update_allowed [
+
+	<FMProperty: #update_allowed type: #Boolean>
+	<generated>
+	^ update_allowed
+]
+
+{ #category : #accessing }
+FamixOpenstackProperty >> update_allowed: anObject [
+	<generated>
+	update_allowed := anObject
 ]
