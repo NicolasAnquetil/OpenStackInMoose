@@ -4,12 +4,12 @@ Class {
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
-		'#description => FMProperty',
-		'#type => FMProperty',
-		'#supportStatus => FMOne type: #FamixHOTSupportStatus opposite: #feature',
 		'#constraints => FMMany type: #FamixHOTConstraint opposite: #constrainedFeature',
-		'#entity => FMOne type: #FamixHOTResourceType opposite: #features',
-		'#schemas => FMMany type: #FamixHOTProperty opposite: #parentFeature'
+		'#description => FMProperty',
+		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #features',
+		'#schemas => FMMany type: #FamixHOTProperty opposite: #parentFeature',
+		'#supportStatus => FMOne type: #FamixHOTSupportStatus opposite: #feature',
+		'#type => FMProperty'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -66,18 +66,18 @@ FamixHOTFeature >> description: anObject [
 ]
 
 { #category : #accessing }
-FamixHOTFeature >> entity [
-	"Relation named: #entity type: #FamixHOTResourceType opposite: #features"
+FamixHOTFeature >> resourceType [
+	"Relation named: #resourceType type: #FamixHOTResourceType opposite: #features"
 
 	<generated>
-	^ entity
+	^ resourceType
 ]
 
 { #category : #accessing }
-FamixHOTFeature >> entity: anObject [
+FamixHOTFeature >> resourceType: anObject [
 
 	<generated>
-	entity := anObject
+	resourceType := anObject
 ]
 
 { #category : #accessing }

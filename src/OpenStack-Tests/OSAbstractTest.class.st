@@ -85,12 +85,12 @@ OSAbstractTest >> createMeteringRuleIn: package [
 
 	prop := (self create: FamixHOTProperty named: 'metering_label_id')
 		parentResource: ruleResource ;
-		entity: labelResource ;
+		resourceType: labelResource ;
 		required: true ;
 		yourself.
 	prop := (self create: FamixHOTProperty named: 'remote_id_prefix')
 		parentResource: ruleResource ;
-		entity: labelResource ;
+		resourceType: labelResource ;
 		required: true ;
 		yourself.
 
@@ -137,11 +137,11 @@ OSAbstractTest >> testModelEntitiesRelationship [
 	self assert: label isNotNil.
 	
 	prop := rule properties detect: [ :p | p name = 'metering_label_id' ].
-	self assert: prop entity equals: label.
+	self assert: prop resourceType equals: label.
 	self assert: (label features includes: prop).
 
 	prop := rule properties detect: [ :p | p name = 'remote_id_prefix' ].
-	self assert: prop entity equals: label.
+	self assert: prop resourceType equals: label.
 	self assert: (label features includes: prop).
 
 ]

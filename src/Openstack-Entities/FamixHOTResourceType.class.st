@@ -4,13 +4,13 @@ Class {
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
-		'#description => FMProperty',
 		'#abstract => FMProperty',
-		'#parentService => FMOne type: #FamixHOTService opposite: #resourceTypes',
 		'#attributes => FMMany type: #FamixHOTAttribute opposite: #parentResource',
+		'#description => FMProperty',
+		'#features => FMMany type: #FamixHOTFeature opposite: #resourceType',
+		'#parentService => FMOne type: #FamixHOTService opposite: #resourceTypes',
 		'#properties => FMMany type: #FamixHOTProperty opposite: #parentResource',
-		'#supportStatus => FMMany type: #FamixHOTSupportStatus opposite: #resourceType',
-		'#features => FMMany type: #FamixHOTFeature opposite: #entity'
+		'#supportStatus => FMMany type: #FamixHOTSupportStatus opposite: #resourceType'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -101,7 +101,7 @@ FamixHOTResourceType >> description: anObject [
 
 { #category : #accessing }
 FamixHOTResourceType >> features [
-	"Relation named: #features type: #FamixHOTFeature opposite: #entity"
+	"Relation named: #features type: #FamixHOTFeature opposite: #resourceType"
 
 	<generated>
 	<derived>
