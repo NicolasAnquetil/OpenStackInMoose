@@ -16,7 +16,7 @@ Class {
 		'constraint',
 		'length',
 		'modulo',
-		'allowedValues',
+		'allowedValue',
 		'allowedPattern',
 		'customConstraint'
 	],
@@ -49,7 +49,7 @@ OpenStackGenerator >> defineClasses [
 	range := builder newClassNamed: #Range.
 	length := builder newClassNamed: #Length.
 	modulo := builder newClassNamed: #Modulo.
-	allowedValues := builder newClassNamed: #AllowedValues.
+	allowedValue := builder newClassNamed: #AllowedValue.
 	allowedPattern := builder newClassNamed: #AllowedPattern.
 	customConstraint := builder newClassNamed: #CustomConstraint.
 
@@ -73,7 +73,7 @@ OpenStackGenerator >> defineHierarchy [
 	
 	modulo --|> constraint.
 	allowedPattern --|> constraint.
-	allowedValues --|> constraint.
+	allowedValue --|> constraint.
 	customConstraint --|> constraint.
 	range --|> constraint.
 	length --|> constraint.
@@ -94,7 +94,7 @@ OpenStackGenerator >> defineProperties [
 	feature property: #description type: #String.
 	feature property: #type type: #String.
 
-	property property: #default type: #Object.
+	property property: #default type: #String.
 	property property: #immutable type: #Boolean.
 	property property: #required type: #Boolean.
 	property property: #update_allowed type: #Boolean.
@@ -110,7 +110,7 @@ OpenStackGenerator >> defineProperties [
 	modulo property: #step type: #Number.
 	modulo property: #offset type: #Number.
 	
-	(allowedValues property: #allowed type: #Object)
+	(allowedValue property: #allowed type: #String)
 		multivalued.
 
 	allowedPattern property: #pattern type: #String.
