@@ -24,7 +24,7 @@ FamixHOTProperty class >> annotation [
 { #category : #accessing }
 FamixHOTProperty >> default [
 
-	<FMProperty: #default type: #Object>
+	<FMProperty: #default type: #String>
 	<generated>
 	^ default
 ]
