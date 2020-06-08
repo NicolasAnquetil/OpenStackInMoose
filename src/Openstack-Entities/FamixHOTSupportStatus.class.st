@@ -1,14 +1,14 @@
 Class {
 	#name : #FamixHOTSupportStatus,
-	#superclass : #FamixHOTHotEntity,
+	#superclass : #FamixHOTEntity,
 	#instVars : [
+		'#feature => FMOne type: #FamixHOTFeature opposite: #supportStatus',
 		'#message => FMProperty',
-		'#version => FMProperty',
-		'#status => FMProperty',
-		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #supportStatus',
-		'#previousStatus => FMOne type: #FamixHOTSupportStatus opposite: #nextstatus',
 		'#nextstatus => FMOne type: #FamixHOTSupportStatus opposite: #previousStatus',
-		'#feature => FMOne type: #FamixHOTFeature opposite: #supportStatus'
+		'#previousStatus => FMOne type: #FamixHOTSupportStatus opposite: #nextstatus',
+		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #supportStatus',
+		'#status => FMProperty',
+		'#version => FMProperty'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -16,7 +16,7 @@ Class {
 { #category : #meta }
 FamixHOTSupportStatus class >> annotation [
 
-	<FMClass: #SupportStatus super: #FamixHOTHotEntity>
+	<FMClass: #SupportStatus super: #FamixHOTEntity>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self

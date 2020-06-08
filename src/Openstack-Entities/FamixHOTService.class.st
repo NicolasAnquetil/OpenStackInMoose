@@ -1,12 +1,12 @@
 Class {
 	#name : #FamixHOTService,
-	#superclass : #FamixHOTHotEntity,
+	#superclass : #FamixHOTEntity,
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
-		'#subServices => FMMany type: #FamixHOTService opposite: #parentService',
 		'#parentService => FMOne type: #FamixHOTService opposite: #subServices',
-		'#resourceTypes => FMMany type: #FamixHOTResourceType opposite: #parentService'
+		'#resourceTypes => FMMany type: #FamixHOTResourceType opposite: #parentService',
+		'#subServices => FMMany type: #FamixHOTService opposite: #parentService'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -14,7 +14,7 @@ Class {
 { #category : #meta }
 FamixHOTService class >> annotation [
 
-	<FMClass: #Service super: #FamixHOTHotEntity>
+	<FMClass: #Service super: #FamixHOTEntity>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self

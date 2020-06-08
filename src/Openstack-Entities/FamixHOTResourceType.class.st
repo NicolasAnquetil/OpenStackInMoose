@@ -1,6 +1,6 @@
 Class {
 	#name : #FamixHOTResourceType,
-	#superclass : #FamixHOTHotEntity,
+	#superclass : #FamixHOTEntity,
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
@@ -20,7 +20,7 @@ Class {
 { #category : #meta }
 FamixHOTResourceType class >> annotation [
 
-	<FMClass: #ResourceType super: #FamixHOTHotEntity>
+	<FMClass: #ResourceType super: #FamixHOTEntity>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self

@@ -1,9 +1,9 @@
 Class {
 	#name : #FamixHOTConstraint,
-	#superclass : #FamixHOTHotEntity,
+	#superclass : #FamixHOTEntity,
 	#instVars : [
-		'#description => FMProperty',
-		'#constrainedFeature => FMOne type: #FamixHOTFeature opposite: #constraints'
+		'#constrainedFeature => FMOne type: #FamixHOTFeature opposite: #constraints',
+		'#description => FMProperty'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -11,7 +11,7 @@ Class {
 { #category : #meta }
 FamixHOTConstraint class >> annotation [
 
-	<FMClass: #Constraint super: #FamixHOTHotEntity>
+	<FMClass: #Constraint super: #FamixHOTEntity>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self

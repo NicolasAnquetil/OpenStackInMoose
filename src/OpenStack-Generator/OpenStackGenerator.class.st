@@ -5,7 +5,6 @@ Class {
 	#name : #OpenStackGenerator,
 	#superclass : #FamixBasicInfrastructureGenerator,
 	#instVars : [
-		'hotEntity',
 		'service',
 		'resourceType',
 		'supportStatus',
@@ -37,8 +36,6 @@ OpenStackGenerator class >> prefix [
 OpenStackGenerator >> defineClasses [
 	super defineClasses.
 
-	hotEntity := builder newClassNamed: #HotEntity.
-
 	service := builder newClassNamed: #Service.
 	resourceType := builder newClassNamed: #ResourceType.
 	supportStatus := builder newClassNamed: #SupportStatus.
@@ -59,14 +56,9 @@ OpenStackGenerator >> defineClasses [
 OpenStackGenerator >> defineHierarchy [
 	super defineHierarchy.
 
-	service --|> hotEntity.
 	service  --|> #TNamedEntity.
-	supportStatus --|> hotEntity.
-	resourceType --|> hotEntity.
 	resourceType  --|> #TNamedEntity.
-	feature --|> hotEntity.
 	feature  --|> #TNamedEntity.
-	constraint --|> hotEntity.
 
 	attribute --|> feature.
 	property --|> feature.
