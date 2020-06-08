@@ -121,7 +121,7 @@ OpenStackGenerator >> defineRelations [
 	(resourceType property: #attributes) <>-* (attribute property: #parentResourceType).
 	(resourceType property: #properties) <>-* (property property: #parentResourceType).
 	(resourceType property: #supportStatus) <>-* (supportStatus property: #resourceType).
-	(resourceType property: #subResourceType) -* (resourceType property: #parentResourceType).
+	(resourceType property: #subResourceType) -* (resourceType property: #superResourceType).
 
 	(supportStatus property: #previousStatus) - (supportStatus property: #nextstatus).
 

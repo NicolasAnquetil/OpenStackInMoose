@@ -8,10 +8,10 @@ Class {
 		'#attributes => FMMany type: #FamixHOTAttribute opposite: #parentResourceType',
 		'#description => FMProperty',
 		'#features => FMMany type: #FamixHOTFeature opposite: #resourceType',
-		'#parentResourceType => FMOne type: #FamixHOTResourceType opposite: #subResourceType',
 		'#parentService => FMOne type: #FamixHOTService opposite: #resourceTypes',
 		'#properties => FMMany type: #FamixHOTProperty opposite: #parentResourceType',
-		'#subResourceType => FMMany type: #FamixHOTResourceType opposite: #parentResourceType',
+		'#subResourceType => FMMany type: #FamixHOTResourceType opposite: #superResourceType',
+		'#superResourceType => FMOne type: #FamixHOTResourceType opposite: #subResourceType',
 		'#supportStatus => FMMany type: #FamixHOTSupportStatus opposite: #resourceType'
 	],
 	#category : #'Openstack-Entities-Entities'
@@ -124,21 +124,6 @@ FamixHOTResourceType >> features: anObject [
 ]
 
 { #category : #accessing }
-FamixHOTResourceType >> parentResourceType [
-	"Relation named: #parentResourceType type: #FamixHOTResourceType opposite: #subResourceType"
-
-	<generated>
-	^ parentResourceType
-]
-
-{ #category : #accessing }
-FamixHOTResourceType >> parentResourceType: anObject [
-
-	<generated>
-	parentResourceType := anObject
-]
-
-{ #category : #accessing }
 FamixHOTResourceType >> parentService [
 	"Relation named: #parentService type: #FamixHOTService opposite: #resourceTypes"
 
@@ -186,7 +171,7 @@ FamixHOTResourceType >> propertiesGroup [
 
 { #category : #accessing }
 FamixHOTResourceType >> subResourceType [
-	"Relation named: #subResourceType type: #FamixHOTResourceType opposite: #parentResourceType"
+	"Relation named: #subResourceType type: #FamixHOTResourceType opposite: #superResourceType"
 
 	<generated>
 	<derived>
@@ -198,6 +183,21 @@ FamixHOTResourceType >> subResourceType: anObject [
 
 	<generated>
 	subResourceType value: anObject
+]
+
+{ #category : #accessing }
+FamixHOTResourceType >> superResourceType [
+	"Relation named: #superResourceType type: #FamixHOTResourceType opposite: #subResourceType"
+
+	<generated>
+	^ superResourceType
+]
+
+{ #category : #accessing }
+FamixHOTResourceType >> superResourceType: anObject [
+
+	<generated>
+	superResourceType := anObject
 ]
 
 { #category : #accessing }
