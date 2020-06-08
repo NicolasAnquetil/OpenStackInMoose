@@ -5,11 +5,13 @@ Class {
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
 		'#abstract => FMProperty',
-		'#attributes => FMMany type: #FamixHOTAttribute opposite: #parentResource',
+		'#attributes => FMMany type: #FamixHOTAttribute opposite: #parentResourceType',
 		'#description => FMProperty',
 		'#features => FMMany type: #FamixHOTFeature opposite: #resourceType',
+		'#parentResourceType => FMOne type: #FamixHOTResourceType opposite: #subResourceType',
 		'#parentService => FMOne type: #FamixHOTService opposite: #resourceTypes',
-		'#properties => FMMany type: #FamixHOTProperty opposite: #parentResource',
+		'#properties => FMMany type: #FamixHOTProperty opposite: #parentResourceType',
+		'#subResourceType => FMMany type: #FamixHOTResourceType opposite: #parentResourceType',
 		'#supportStatus => FMMany type: #FamixHOTSupportStatus opposite: #resourceType'
 	],
 	#category : #'Openstack-Entities-Entities'
@@ -57,6 +59,12 @@ FamixHOTResourceType >> addProperty: anObject [
 ]
 
 { #category : #adding }
+FamixHOTResourceType >> addSubResourceType: anObject [
+	<generated>
+	^ self subResourceType add: anObject
+]
+
+{ #category : #adding }
 FamixHOTResourceType >> addSupportStatu: anObject [
 	<generated>
 	^ self supportStatus add: anObject
@@ -64,7 +72,7 @@ FamixHOTResourceType >> addSupportStatu: anObject [
 
 { #category : #accessing }
 FamixHOTResourceType >> attributes [
-	"Relation named: #attributes type: #FamixHOTAttribute opposite: #parentResource"
+	"Relation named: #attributes type: #FamixHOTAttribute opposite: #parentResourceType"
 
 	<generated>
 	<derived>
@@ -116,6 +124,21 @@ FamixHOTResourceType >> features: anObject [
 ]
 
 { #category : #accessing }
+FamixHOTResourceType >> parentResourceType [
+	"Relation named: #parentResourceType type: #FamixHOTResourceType opposite: #subResourceType"
+
+	<generated>
+	^ parentResourceType
+]
+
+{ #category : #accessing }
+FamixHOTResourceType >> parentResourceType: anObject [
+
+	<generated>
+	parentResourceType := anObject
+]
+
+{ #category : #accessing }
 FamixHOTResourceType >> parentService [
 	"Relation named: #parentService type: #FamixHOTService opposite: #resourceTypes"
 
@@ -140,7 +163,7 @@ FamixHOTResourceType >> parentServiceGroup [
 
 { #category : #accessing }
 FamixHOTResourceType >> properties [
-	"Relation named: #properties type: #FamixHOTProperty opposite: #parentResource"
+	"Relation named: #properties type: #FamixHOTProperty opposite: #parentResourceType"
 
 	<generated>
 	<derived>
@@ -159,6 +182,22 @@ FamixHOTResourceType >> propertiesGroup [
 	<generated>
 	<navigation: 'Properties'>
 	^ MooseGroup withAll: self properties asSet
+]
+
+{ #category : #accessing }
+FamixHOTResourceType >> subResourceType [
+	"Relation named: #subResourceType type: #FamixHOTResourceType opposite: #parentResourceType"
+
+	<generated>
+	<derived>
+	^ subResourceType
+]
+
+{ #category : #accessing }
+FamixHOTResourceType >> subResourceType: anObject [
+
+	<generated>
+	subResourceType value: anObject
 ]
 
 { #category : #accessing }

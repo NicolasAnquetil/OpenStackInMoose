@@ -16,9 +16,9 @@ Class {
 		'constraint',
 		'length',
 		'modulo',
-		'allowedValue',
 		'allowedPattern',
-		'customConstraint'
+		'customConstraint',
+		'allowedValues'
 	],
 	#category : #'OpenStack-Generator'
 }
@@ -49,7 +49,7 @@ OpenStackGenerator >> defineClasses [
 	range := builder newClassNamed: #Range.
 	length := builder newClassNamed: #Length.
 	modulo := builder newClassNamed: #Modulo.
-	allowedValue := builder newClassNamed: #AllowedValue.
+	allowedValues := builder newClassNamed: #AllowedValues.
 	allowedPattern := builder newClassNamed: #AllowedPattern.
 	customConstraint := builder newClassNamed: #CustomConstraint.
 
@@ -73,7 +73,7 @@ OpenStackGenerator >> defineHierarchy [
 	
 	modulo --|> constraint.
 	allowedPattern --|> constraint.
-	allowedValue --|> constraint.
+	allowedValues --|> constraint.
 	customConstraint --|> constraint.
 	range --|> constraint.
 	length --|> constraint.
@@ -97,7 +97,7 @@ OpenStackGenerator >> defineProperties [
 	property property: #default type: #String.
 	property property: #immutable type: #Boolean.
 	property property: #required type: #Boolean.
-	property property: #update_allowed type: #Boolean.
+	property property: #updateAllowed type: #Boolean.
 
 	constraint property: #description type: #String.
 
@@ -110,7 +110,7 @@ OpenStackGenerator >> defineProperties [
 	modulo property: #step type: #Number.
 	modulo property: #offset type: #Number.
 	
-	(allowedValue property: #allowed type: #String)
+	(allowedValues property: #allowed type: #String)
 		multivalued.
 
 	allowedPattern property: #pattern type: #String.
@@ -126,9 +126,10 @@ OpenStackGenerator >> defineRelations [
 	(service property: #subServices) <>-* (service property: #parentService).
 	(service property: #resourceTypes) <>-* (resourceType property: #parentService).
 
-	(resourceType property: #attributes) <>-* (attribute property: #parentResource).
-	(resourceType property: #properties) <>-* (property property: #parentResource).
+	(resourceType property: #attributes) <>-* (attribute property: #parentResourceType).
+	(resourceType property: #properties) <>-* (property property: #parentResourceType).
 	(resourceType property: #supportStatus) <>-* (supportStatus property: #resourceType).
+	(resourceType property: #subResourceType) -* (resourceType property: #parentResourceType).
 
 	(supportStatus property: #previousStatus) - (supportStatus property: #nextstatus).
 

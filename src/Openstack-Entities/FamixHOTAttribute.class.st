@@ -2,7 +2,7 @@ Class {
 	#name : #FamixHOTAttribute,
 	#superclass : #FamixHOTFeature,
 	#instVars : [
-		'#parentResource => FMOne type: #FamixHOTResourceType opposite: #attributes'
+		'#parentResourceType => FMOne type: #FamixHOTResourceType opposite: #attributes'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -17,24 +17,24 @@ FamixHOTAttribute class >> annotation [
 ]
 
 { #category : #accessing }
-FamixHOTAttribute >> parentResource [
-	"Relation named: #parentResource type: #FamixHOTResourceType opposite: #attributes"
+FamixHOTAttribute >> parentResourceType [
+	"Relation named: #parentResourceType type: #FamixHOTResourceType opposite: #attributes"
 
 	<generated>
 	<container>
-	^ parentResource
+	^ parentResourceType
 ]
 
 { #category : #accessing }
-FamixHOTAttribute >> parentResource: anObject [
+FamixHOTAttribute >> parentResourceType: anObject [
 
 	<generated>
-	parentResource := anObject
+	parentResourceType := anObject
 ]
 
 { #category : #navigation }
-FamixHOTAttribute >> parentResourceGroup [
+FamixHOTAttribute >> parentResourceTypeGroup [
 	<generated>
-	<navigation: 'ParentResource'>
-	^ MooseGroup with: self parentResource
+	<navigation: 'ParentResourceType'>
+	^ MooseGroup with: self parentResourceType
 ]
