@@ -1,5 +1,5 @@
 Class {
-	#name : #FamixHOTAllowedValue,
+	#name : #FamixHOTAllowedValues,
 	#superclass : #FamixHOTConstraint,
 	#instVars : [
 		'#allowed => FMProperty'
@@ -8,16 +8,16 @@ Class {
 }
 
 { #category : #meta }
-FamixHOTAllowedValue class >> annotation [
+FamixHOTAllowedValues class >> annotation [
 
-	<FMClass: #AllowedValue super: #FamixHOTConstraint>
+	<FMClass: #AllowedValues super: #FamixHOTConstraint>
 	<package: #'Openstack-Entities'>
 	<generated>
 	^self
 ]
 
 { #category : #accessing }
-FamixHOTAllowedValue >> allowed [
+FamixHOTAllowedValues >> allowed [
 
 	<FMProperty: #allowed type: #String>
 	<generated>
@@ -26,7 +26,7 @@ FamixHOTAllowedValue >> allowed [
 ]
 
 { #category : #accessing }
-FamixHOTAllowedValue >> allowed: anObject [
+FamixHOTAllowedValues >> allowed: anObject [
 	<generated>
 	allowed := anObject
 ]
