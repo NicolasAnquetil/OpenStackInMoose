@@ -16,16 +16,16 @@ Because they are generated from the actual metamodel, placing is not ideal, ther
 
 The top, named, entities of the metamodel:
 
-<img src="doc/namedHOT.png" alt="Top, named, entities" width="260"/>
+<img src="doc/mmNamed.png" alt="Top, named, entities" width="260"/>
 
 Core part of the metamodel
 
-<img alt="Core part" src="doc/coreHOT.png" width="400"/>
+<img alt="Core part" src="doc/mmCore.png" width="400"/>
 
 Detailed view of the ```Feature```s, i.e. ```Attribute``` and ```Propertie``` : 
 
-<img alt="Detailed view of Features" src="doc/resourceTypeHOT.png" width="310"/>
+<img alt="Detailed view of Features" src="doc/mmResourceType.png" width="310"/>
 
 And, finally, detailed view of the ```Constraints```:
 
-<img alt="Detailed bview of Constraints" src="doc/constraintHOT.png" width="580"/>
+<img alt="Detailed bview of Constraints" src="doc/mmConstraint.png" width="580"/>
