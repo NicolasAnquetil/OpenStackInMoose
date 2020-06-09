@@ -32,6 +32,15 @@ FamixHOTService >> addSubService: anObject [
 	^ self subServices add: anObject
 ]
 
+{ #category : #printing }
+FamixHOTService >> mooseNameOn: aStream [
+	self parentService
+		ifNotNil: [ :parent |
+			parent mooseNameOn: aStream.
+			aStream nextPutAll: '::' ].
+	self name ifNotNil: [ :n | aStream nextPutAll: n ]
+]
+
 { #category : #accessing }
 FamixHOTService >> parentService [
 	"Relation named: #parentService type: #FamixHOTService opposite: #subServices"

@@ -123,6 +123,15 @@ FamixHOTResourceType >> features: anObject [
 	features value: anObject
 ]
 
+{ #category : #printing }
+FamixHOTResourceType >> mooseNameOn: aStream [
+	self parentService
+		ifNotNil: [ :parent |
+			parent mooseNameOn: aStream.
+			aStream nextPutAll: '::' ].
+	self name ifNotNil: [ :n | aStream nextPutAll: n ]
+]
+
 { #category : #accessing }
 FamixHOTResourceType >> parentService [
 	"Relation named: #parentService type: #FamixHOTService opposite: #resourceTypes"
