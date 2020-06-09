@@ -1,6 +1,8 @@
 Class {
 	#name : #FamixHOTSupportStatus,
 	#superclass : #FamixHOTEntity,
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#feature => FMOne type: #FamixHOTFeature opposite: #supportStatus',
 		'#message => FMProperty',

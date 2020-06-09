@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixHOTResourceType,
 	#superclass : #FamixHOTEntity,
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
+	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#abstract => FMProperty',
 		'#attributes => FMMany type: #FamixHOTAttribute opposite: #parentResourceType',
@@ -93,15 +93,6 @@ FamixHOTResourceType >> attributesGroup [
 	^ MooseGroup withAll: self attributes asSet
 ]
 
-{ #category : #'meta-data' }
-FamixHOTResourceType >> dependencies [
-	^MooseObjectQueryResult
-		on: self
-		withAll:
-			(properties select: [ :p | p resourceType isNotNil ] thenCollect: #resourceType) ,
-			(attributes select: [ :p | p resourceType isNotNil ] thenCollect: #resourceType)
-]
-
 { #category : #accessing }
 FamixHOTResourceType >> description [
 
@@ -130,6 +121,12 @@ FamixHOTResourceType >> features: anObject [
 
 	<generated>
 	features value: anObject
+]
+
+{ #category : #'query dependencies' }
+FamixHOTResourceType >> getDependentResourceTypes [
+	^((properties select: [ :p | p resourceType isNotNil ] thenCollect: #resourceType) asSet
+		union: (attributes select: [ :p | p resourceType isNotNil ] thenCollect: #resourceType) asSet)
 ]
 
 { #category : #printing }
@@ -185,6 +182,18 @@ FamixHOTResourceType >> propertiesGroup [
 	<generated>
 	<navigation: 'Properties'>
 	^ MooseGroup withAll: self properties asSet
+]
+
+{ #category : #'query dependencies' }
+FamixHOTResourceType >> queryOutgoingDependencies [
+	"computing dependencies 'manually' "
+
+	^ self createOutgoingQueryResultWith:
+		(self getDependentResourceTypes
+			collect: [ :dep | MooseQueryTypeDeclarationAssociation newFrom: self to: dep])
+	
+	
+		
 ]
 
 { #category : #accessing }

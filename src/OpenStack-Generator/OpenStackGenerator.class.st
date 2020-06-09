@@ -56,8 +56,11 @@ OpenStackGenerator >> defineClasses [
 OpenStackGenerator >> defineHierarchy [
 	super defineHierarchy.
 
+	service  --|> #TEntityMetaLevelDependency.
 	service  --|> #TNamedEntity.
+	resourceType  --|> #TEntityMetaLevelDependency.
 	resourceType  --|> #TNamedEntity.
+	supportStatus --|> #TEntityMetaLevelDependency.
 	feature  --|> #TNamedEntity.
 
 	attribute --|> feature.

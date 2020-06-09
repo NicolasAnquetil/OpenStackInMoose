@@ -1,8 +1,8 @@
 Class {
 	#name : #FamixHOTService,
 	#superclass : #FamixHOTEntity,
-	#traits : 'FamixTNamedEntity',
-	#classTraits : 'FamixTNamedEntity classTrait',
+	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
+	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#parentService => FMOne type: #FamixHOTService opposite: #subServices',
 		'#resourceTypes => FMMany type: #FamixHOTResourceType opposite: #parentService',
