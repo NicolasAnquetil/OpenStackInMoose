@@ -93,6 +93,15 @@ FamixHOTResourceType >> attributesGroup [
 	^ MooseGroup withAll: self attributes asSet
 ]
 
+{ #category : #'meta-data' }
+FamixHOTResourceType >> dependencies [
+	^MooseObjectQueryResult
+		on: self
+		withAll:
+			(properties select: [ :p | p resourceType isNotNil ] thenCollect: #resourceType) ,
+			(attributes select: [ :p | p resourceType isNotNil ] thenCollect: #resourceType)
+]
+
 { #category : #accessing }
 FamixHOTResourceType >> description [
 
