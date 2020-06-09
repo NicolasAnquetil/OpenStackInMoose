@@ -4,8 +4,8 @@ Class {
 	#instVars : [
 		'#feature => FMOne type: #FamixHOTFeature opposite: #supportStatus',
 		'#message => FMProperty',
-		'#nextstatus => FMOne type: #FamixHOTSupportStatus opposite: #previousStatus',
-		'#previousStatus => FMOne type: #FamixHOTSupportStatus opposite: #nextstatus',
+		'#nextStatus => FMOne type: #FamixHOTSupportStatus opposite: #previousStatus',
+		'#previousStatus => FMOne type: #FamixHOTSupportStatus opposite: #nextStatus',
 		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #supportStatus',
 		'#status => FMProperty',
 		'#version => FMProperty'
@@ -53,24 +53,24 @@ FamixHOTSupportStatus >> message: anObject [
 ]
 
 { #category : #accessing }
-FamixHOTSupportStatus >> nextstatus [
-	"Relation named: #nextstatus type: #FamixHOTSupportStatus opposite: #previousStatus"
+FamixHOTSupportStatus >> nextStatus [
+	"Relation named: #nextStatus type: #FamixHOTSupportStatus opposite: #previousStatus"
 
 	<generated>
 	<derived>
-	^ nextstatus
+	^ nextStatus
 ]
 
 { #category : #accessing }
-FamixHOTSupportStatus >> nextstatus: anObject [
+FamixHOTSupportStatus >> nextStatus: anObject [
 
 	<generated>
-	nextstatus := anObject
+	nextStatus := anObject
 ]
 
 { #category : #accessing }
 FamixHOTSupportStatus >> previousStatus [
-	"Relation named: #previousStatus type: #FamixHOTSupportStatus opposite: #nextstatus"
+	"Relation named: #previousStatus type: #FamixHOTSupportStatus opposite: #nextStatus"
 
 	<generated>
 	^ previousStatus
