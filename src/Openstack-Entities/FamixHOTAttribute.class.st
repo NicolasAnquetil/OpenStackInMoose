@@ -38,3 +38,11 @@ FamixHOTAttribute >> parentResourceTypeGroup [
 	<navigation: 'ParentResourceType'>
 	^ MooseGroup with: self parentResourceType
 ]
+
+{ #category : #printing }
+FamixHOTAttribute >> printOn: aStream [
+	^aStream
+		nextPutAll: '(att.)' ;
+		nextPutAll: self name ;
+		yourself
+]

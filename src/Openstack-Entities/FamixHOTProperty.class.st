@@ -87,6 +87,14 @@ FamixHOTProperty >> parentResourceTypeGroup [
 	^ MooseGroup with: self parentResourceType
 ]
 
+{ #category : #printing }
+FamixHOTProperty >> printOn: aStream [
+	^aStream
+		nextPutAll: '(prop.)' ;
+		nextPutAll: self name ;
+		yourself
+]
+
 { #category : #accessing }
 FamixHOTProperty >> required [
 

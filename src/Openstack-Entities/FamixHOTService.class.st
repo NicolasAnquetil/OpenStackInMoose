@@ -64,6 +64,14 @@ FamixHOTService >> parentServiceGroup [
 	^ MooseGroup with: self parentService
 ]
 
+{ #category : #printing }
+FamixHOTService >> printOn: aStream [
+	^aStream
+		nextPutAll: '(S)' ;
+		nextPutAll: self mooseName ;
+		yourself
+]
+
 { #category : #'query dependencies' }
 FamixHOTService >> queryOutgoingDependencies [
 	"Associations + typeDeclarations"

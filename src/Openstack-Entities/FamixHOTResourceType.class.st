@@ -161,6 +161,14 @@ FamixHOTResourceType >> parentServiceGroup [
 	^ MooseGroup with: self parentService
 ]
 
+{ #category : #printing }
+FamixHOTResourceType >> printOn: aStream [
+	^aStream
+		nextPutAll: '(P)' ;
+		nextPutAll: self name ;
+		yourself
+]
+
 { #category : #accessing }
 FamixHOTResourceType >> properties [
 	"Relation named: #properties type: #FamixHOTProperty opposite: #parentResourceType"
