@@ -64,6 +64,19 @@ FamixHOTService >> parentServiceGroup [
 	^ MooseGroup with: self parentService
 ]
 
+{ #category : #'query dependencies' }
+FamixHOTService >> queryOutgoingDependencies [
+	"Associations + typeDeclarations"
+	| dependents |
+	dependents := OrderedCollection new.
+	self childrenSelectors do: [ :childrenSelector | 
+		(self perform: childrenSelector)
+			ifNotNil: [ :children | 
+				children do: [ :child | dependents addAll: child queryOutgoingDependencies ] ] ].
+	^ self createOutgoingQueryResultWith: dependents
+
+]
+
 { #category : #accessing }
 FamixHOTService >> resourceTypes [
 	"Relation named: #resourceTypes type: #FamixHOTResourceType opposite: #parentService"
