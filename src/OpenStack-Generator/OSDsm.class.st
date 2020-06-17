@@ -39,10 +39,15 @@ OSDsm >> boxPopup [
 
 { #category : #'as yet unclassified' }
 OSDsm >> colorX: x Y: y [
-	(x = y) ifTrue: [ ^Color darkGray ].
-	^((dependencies at: x) includes: y)
-		ifTrue: [ Color blue ]
-		ifFalse: [ Color lightGray lighter ]						
+	| tags |
+	(x = y)
+		ifTrue: [ ^Color darkGray ].
+	((dependencies at: x) includes: y)
+		ifFalse: [ ^Color lightGray lighter ].
+	tags := x tags intersection: y tags.
+	tags
+		ifNotEmpty: [ ^ tags anyOne color ].
+	^Color blue				
 ]
 
 { #category : #'as yet unclassified' }
