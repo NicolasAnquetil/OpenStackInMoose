@@ -109,11 +109,7 @@ FamixHOTResourceType >> description: anObject [
 
 { #category : #accessing }
 FamixHOTResourceType >> features [
-	"Relation named: #features type: #FamixHOTFeature opposite: #resourceType"
-
-	<generated>
-	<derived>
-	^ features
+	^attributes , properties 
 ]
 
 { #category : #accessing }
@@ -124,9 +120,21 @@ FamixHOTResourceType >> features: anObject [
 ]
 
 { #category : #'query dependencies' }
-FamixHOTResourceType >> getDependentResourceTypes [
-	^((properties select: [ :p | p resourceType isNotNil ] thenCollect: #resourceType) asSet
-		union: (attributes select: [ :p | p resourceType isNotNil ] thenCollect: #resourceType) asSet)
+FamixHOTResourceType >> getResourceTypeDependencies [
+	^self getResourceTypeDependenciesInFeatures 
+		union: self getResourceTypeDependenciesInSchemas
+]
+
+{ #category : #'query dependencies' }
+FamixHOTResourceType >> getResourceTypeDependenciesInFeatures [
+	^self features flatCollect: [ :f | f queryOutgoingDependencies ]
+]
+
+{ #category : #'query dependencies' }
+FamixHOTResourceType >> getResourceTypeDependenciesInSchemas [
+	^(self features select: [ :f | f schemas isNotEmpty ] thenCollect: [ :s | s queryOutgoingDependencies ])
+		flatten
+			asSet
 ]
 
 { #category : #printing }
@@ -197,7 +205,7 @@ FamixHOTResourceType >> queryOutgoingDependencies [
 	"computing dependencies 'manually' "
 
 	^ self createOutgoingQueryResultWith:
-		(self getDependentResourceTypes
+		(self getResourceTypeDependencies
 			collect: [ :dep | MooseQueryTypeDeclarationAssociation newFrom: self to: dep])
 	
 	

@@ -65,6 +65,25 @@ FamixHOTFeature >> description: anObject [
 	description := anObject
 ]
 
+{ #category : #'query dependencies' }
+FamixHOTFeature >> privateGetResourceTypeDependencies [
+	| depFromSchemas |
+	depFromSchemas := (self schemas
+		flatCollect: [ :each |
+			each privateGetResourceTypeDependencies
+		]) asSet.
+	self resourceType
+		ifNotNil: [ :res | depFromSchemas add: res ].
+	^depFromSchemas 
+
+]
+
+{ #category : #'query dependencies' }
+FamixHOTFeature >> queryOutgoingDependencies [
+	^self createOutgoingQueryResultWith:
+		self privateGetResourceTypeDependencies
+]
+
 { #category : #accessing }
 FamixHOTFeature >> resourceType [
 	"Relation named: #resourceType type: #FamixHOTResourceType opposite: #features"
