@@ -119,24 +119,6 @@ FamixHOTResourceType >> features: anObject [
 	features value: anObject
 ]
 
-{ #category : #'query dependencies' }
-FamixHOTResourceType >> getResourceTypeDependencies [
-	^self getResourceTypeDependenciesInFeatures 
-		union: self getResourceTypeDependenciesInSchemas
-]
-
-{ #category : #'query dependencies' }
-FamixHOTResourceType >> getResourceTypeDependenciesInFeatures [
-	^self features flatCollect: [ :f | f queryOutgoingDependencies ]
-]
-
-{ #category : #'query dependencies' }
-FamixHOTResourceType >> getResourceTypeDependenciesInSchemas [
-	^(self features select: [ :f | f schemas isNotEmpty ] thenCollect: [ :s | s queryOutgoingDependencies ])
-		flatten
-			asSet
-]
-
 { #category : #printing }
 FamixHOTResourceType >> mooseNameOn: aStream [
 	self parentService
@@ -204,9 +186,8 @@ FamixHOTResourceType >> propertiesGroup [
 FamixHOTResourceType >> queryOutgoingDependencies [
 	"computing dependencies 'manually' "
 
-	^ self createOutgoingQueryResultWith:
-		(self getResourceTypeDependencies
-			collect: [ :dep | MooseQueryTypeDeclarationAssociation newFrom: self to: dep])
+	^self createOutgoingQueryResultWith:
+		(self features flatCollect: #queryOutgoingDependencies)
 	
 	
 		

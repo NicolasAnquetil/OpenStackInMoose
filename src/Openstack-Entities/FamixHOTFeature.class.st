@@ -73,7 +73,8 @@ FamixHOTFeature >> privateGetResourceTypeDependencies [
 			each privateGetResourceTypeDependencies
 		]) asSet.
 	self resourceType
-		ifNotNil: [ :res | depFromSchemas add: res ].
+		ifNotNil: [ :res | depFromSchemas
+			add: (MooseQueryTypeDeclarationAssociation newFrom: self to: res) ].
 	^depFromSchemas 
 
 ]
