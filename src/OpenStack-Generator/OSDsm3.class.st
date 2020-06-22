@@ -1,5 +1,5 @@
 Class {
-	#name : #OSDsm,
+	#name : #OSDsm3,
 	#superclass : #Object,
 	#instVars : [
 		'elements',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-OSDsm >> boxPopup [
+OSDsm3 >> boxPopup [
 	| popup |
 	popup := RSPopup new
 		text: [ :model ||sourceService targetService resourceDependencies|
@@ -38,7 +38,7 @@ OSDsm >> boxPopup [
 ]
 
 { #category : #'as yet unclassified' }
-OSDsm >> colorX: x Y: y [
+OSDsm3 >> colorX: x Y: y [
 	| tags |
 	(x = y)
 		ifTrue: [ ^Color darkGray ].
@@ -51,7 +51,7 @@ OSDsm >> colorX: x Y: y [
 ]
 
 { #category : #'as yet unclassified' }
-OSDsm >> draw [
+OSDsm3 >> draw [
 	| canvas shapes |
 	canvas := RSCanvas new.
 	shapes := elements flatCollect: [ :x |
@@ -73,7 +73,7 @@ OSDsm >> draw [
 ]
 
 { #category : #'as yet unclassified' }
-OSDsm >> elements: aCollection [
+OSDsm3 >> elements: aCollection [
 	elements := aCollection.
 	dependencies := Dictionary new: aCollection size.
 	aCollection do: [ :e |
