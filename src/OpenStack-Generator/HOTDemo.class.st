@@ -50,6 +50,32 @@ HOTDemo >> dsm [
 	^dsm
 ]
 
+{ #category : #'as yet unclassified' }
+HOTDemo >> graphDepOn: services [
+
+	| bldr |
+	bldr := RTMondrian new.
+	bldr shape box color: [:e | e tags isEmpty ifTrue: [ Color gray ] ifFalse: [ e tags anyOne color ]  ].
+	bldr
+		nodes: services.
+
+	bldr shape arrowedLine color: Color black.
+	bldr edges connectToAll: [:s | s queryOutgoingDependencies atScope: FamixHOTService].
+	bldr layout force.
+	bldr build.
+	^bldr view
+]
+
+{ #category : #accessing }
+HOTDemo >> leafServices [
+	^leafServices 
+]
+
+{ #category : #accessing }
+HOTDemo >> model [
+	^model
+]
+
 { #category : #accessing }
 HOTDemo >> model: aModel [
 	model := aModel.
