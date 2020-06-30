@@ -10,12 +10,12 @@ Class {
 	#category : #'OpenStack-Generator'
 }
 
-{ #category : #accessing }
+{ #category : #api }
 HOTDemo >> clearTags [
 	model tags copy do: [ :t | t remove ]
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 HOTDemo >> colorAt: i [
 	"requires a bit of fidling because indices in Pharo start at 1"
 	| colors |
@@ -23,12 +23,12 @@ HOTDemo >> colorAt: i [
 	^ colors at: (((i - 1) \\ colors size) + 1)
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 HOTDemo >> colorTheme [
 	^{Color red . Color green . Color purple . Color orange . Color yellow . Color brown }
 ]
 
-{ #category : #accessing }
+{ #category : #api }
 HOTDemo >> computeCycles [
 	tarjan := MalTarjan new.
 	tarjan nodes: leafServices.
@@ -36,13 +36,13 @@ HOTDemo >> computeCycles [
 	tarjan run.
 ]
 
-{ #category : #accessing }
+{ #category : #api }
 HOTDemo >> cycles [
 	tarjan ifNil: [ self computeCycles ].
 	^tarjan circuits
 ]
 
-{ #category : #accessing }
+{ #category : #api }
 HOTDemo >> dsm [
 	dsm := OSDsm2 new.
 	dsm objects: leafServices.
@@ -50,7 +50,12 @@ HOTDemo >> dsm [
 	^dsm
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #searching }
+HOTDemo >> entity: aClass named: aString [
+	^(model allWithType: aClass) detect: [ :s | s name = aString ]
+]
+
+{ #category : #api }
 HOTDemo >> graphDepOn: services [
 
 	| bldr |
@@ -71,6 +76,14 @@ HOTDemo >> leafServices [
 	^leafServices 
 ]
 
+{ #category : #api }
+HOTDemo >> lonelyResources [
+	^(model allWithType: FamixHOTResourceType)
+		select: [ :rt |
+			rt queryOutgoingDependencies withoutSelfLoops isEmpty and:
+			[ rt queryIncomingDependencies withoutSelfLoops isEmpty ] ]
+]
+
 { #category : #accessing }
 HOTDemo >> model [
 	^model
@@ -82,7 +95,17 @@ HOTDemo >> model: aModel [
 	leafServices := (model allWithType: FamixHOTService) select: [ :s | s subServices isEmpty].
 ]
 
-{ #category : #accessing }
+{ #category : #searching }
+HOTDemo >> resourceNamed: aString [
+	^self entity: FamixHOTResourceType named: aString
+]
+
+{ #category : #searching }
+HOTDemo >> serviceNamed: aString [
+	^self entity: FamixHOTService named: aString
+]
+
+{ #category : #api }
 HOTDemo >> tagCycles [
 	| i |
 	i := 1.
