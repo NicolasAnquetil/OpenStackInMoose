@@ -202,7 +202,7 @@ FamixHOTResourceType >> queryLocalOutgoingDependencies [
 	"computing dependencies 'manually' "
 
 	^self createOutgoingQueryResultWith:
-		(self features flatCollect: #queryOutgoingDependencies)
+		((properties , attributes) flatCollect: #queryOutgoingDependencies)
 
 ]
 
