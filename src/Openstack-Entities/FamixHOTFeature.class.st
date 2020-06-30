@@ -4,12 +4,12 @@ Class {
 	#traits : 'FamixTNamedEntity',
 	#classTraits : 'FamixTNamedEntity classTrait',
 	#instVars : [
-		'#constraints => FMMany type: #FamixHOTConstraint opposite: #constrainedFeature',
 		'#description => FMProperty',
-		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #referringFeatures',
-		'#schemas => FMMany type: #FamixHOTProperty opposite: #parentFeature',
+		'#type => FMProperty',
 		'#supportStatus => FMOne type: #FamixHOTSupportStatus opposite: #feature',
-		'#type => FMProperty'
+		'#constraints => FMMany type: #FamixHOTConstraint opposite: #constrainedFeature',
+		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #referringFeatures',
+		'#schemas => FMMany type: #FamixHOTProperty opposite: #parentFeature'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -74,7 +74,7 @@ FamixHOTFeature >> privateGetResourceTypeDependencies [
 		]) asSet.
 	self resourceType
 		ifNotNil: [ :res | depFromSchemas
-			add: (MooseQueryDependencyAssociation newFrom: res to: self) ].
+			add: (MooseQueryDependencyAssociation newFrom: self to: res) ].
 	^depFromSchemas 
 
 ]
@@ -87,7 +87,7 @@ FamixHOTFeature >> queryOutgoingDependencies [
 
 { #category : #accessing }
 FamixHOTFeature >> resourceType [
-	"Relation named: #resourceType type: #FamixHOTResourceType opposite: #features"
+	"Relation named: #resourceType type: #FamixHOTResourceType opposite: #referringFeatures"
 
 	<generated>
 	^ resourceType
@@ -114,6 +114,13 @@ FamixHOTFeature >> schemas: anObject [
 
 	<generated>
 	schemas value: anObject
+]
+
+{ #category : #navigation }
+FamixHOTFeature >> schemasGroup [
+	<generated>
+	<navigation: 'Schemas'>
+	^ MooseGroup withAll: self schemas asSet
 ]
 
 { #category : #accessing }

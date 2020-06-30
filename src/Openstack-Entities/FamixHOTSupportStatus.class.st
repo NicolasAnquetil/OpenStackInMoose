@@ -4,13 +4,13 @@ Class {
 	#traits : 'TEntityMetaLevelDependency',
 	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#instVars : [
-		'#feature => FMOne type: #FamixHOTFeature opposite: #supportStatus',
 		'#message => FMProperty',
-		'#nextStatus => FMOne type: #FamixHOTSupportStatus opposite: #previousStatus',
-		'#previousStatus => FMOne type: #FamixHOTSupportStatus opposite: #nextStatus',
-		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #supportStatus',
+		'#version => FMProperty',
 		'#status => FMProperty',
-		'#version => FMProperty'
+		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #supportStatus',
+		'#previousStatus => FMOne type: #FamixHOTSupportStatus opposite: #nextStatus',
+		'#nextStatus => FMOne type: #FamixHOTSupportStatus opposite: #previousStatus',
+		'#feature => FMOne type: #FamixHOTFeature opposite: #supportStatus'
 	],
 	#category : #'Openstack-Entities-Entities'
 }

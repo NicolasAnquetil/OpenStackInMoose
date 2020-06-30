@@ -4,15 +4,15 @@ Class {
 	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
-		'#abstract => FMProperty',
-		'#attributes => FMMany type: #FamixHOTAttribute opposite: #parentResourceType',
 		'#description => FMProperty',
+		'#abstract => FMProperty',
 		'#parentService => FMOne type: #FamixHOTService opposite: #resourceTypes',
+		'#attributes => FMMany type: #FamixHOTAttribute opposite: #parentResourceType',
 		'#properties => FMMany type: #FamixHOTProperty opposite: #parentResourceType',
-		'#referringFeatures',
+		'#supportStatus => FMMany type: #FamixHOTSupportStatus opposite: #resourceType',
 		'#subResourceType => FMMany type: #FamixHOTResourceType opposite: #superResourceType',
 		'#superResourceType => FMOne type: #FamixHOTResourceType opposite: #subResourceType',
-		'#supportStatus => FMMany type: #FamixHOTSupportStatus opposite: #resourceType'
+		'#referringFeatures => FMMany type: #FamixHOTFeature opposite: #resourceType'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -47,15 +47,15 @@ FamixHOTResourceType >> addAttribute: anObject [
 ]
 
 { #category : #adding }
-FamixHOTResourceType >> addFeature: anObject [
-	<generated>
-	^ self features add: anObject
-]
-
-{ #category : #adding }
 FamixHOTResourceType >> addProperty: anObject [
 	<generated>
 	^ self properties add: anObject
+]
+
+{ #category : #adding }
+FamixHOTResourceType >> addReferringFeature: anObject [
+	<generated>
+	^ self referringFeatures add: anObject
 ]
 
 { #category : #adding }
@@ -107,18 +107,6 @@ FamixHOTResourceType >> description: anObject [
 	description := anObject
 ]
 
-{ #category : #accessing }
-FamixHOTResourceType >> features [
-	^attributes , properties 
-]
-
-{ #category : #accessing }
-FamixHOTResourceType >> features: anObject [
-
-	<generated>
-	features value: anObject
-]
-
 { #category : #printing }
 FamixHOTResourceType >> mooseNameOn: aStream [
 	self parentService
@@ -154,7 +142,7 @@ FamixHOTResourceType >> parentServiceGroup [
 { #category : #printing }
 FamixHOTResourceType >> printOn: aStream [
 	^aStream
-		nextPutAll: '(P)' ;
+		nextPutAll: '(R)' ;
 		nextPutAll: self name ;
 		yourself
 ]
@@ -215,9 +203,7 @@ FamixHOTResourceType >> queryLocalOutgoingDependencies [
 
 	^self createOutgoingQueryResultWith:
 		(self features flatCollect: #queryOutgoingDependencies)
-	
-	
-		
+
 ]
 
 { #category : #'query dependencies' }
@@ -229,6 +215,15 @@ FamixHOTResourceType >> queryOutgoingDependencies [
 		aCollection addAll: sub queryOutgoingDependencies ].
 
 	^ aCollection
+]
+
+{ #category : #accessing }
+FamixHOTResourceType >> referringFeatures [
+	"Relation named: #referringFeatures type: #FamixHOTFeature opposite: #resourceType"
+
+	<generated>
+	<derived>
+	^ referringFeatures
 ]
 
 { #category : #accessing }

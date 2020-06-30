@@ -4,10 +4,10 @@ Class {
 	#instVars : [
 		'#default => FMProperty',
 		'#immutable => FMProperty',
-		'#parentFeature => FMOne type: #FamixHOTFeature opposite: #schemas',
-		'#parentResourceType => FMOne type: #FamixHOTResourceType opposite: #properties',
 		'#required => FMProperty',
-		'#updateAllowed => FMProperty'
+		'#updateAllowed => FMProperty',
+		'#parentResourceType => FMOne type: #FamixHOTResourceType opposite: #properties',
+		'#parentFeature => FMOne type: #FamixHOTFeature opposite: #schemas'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
@@ -54,6 +54,7 @@ FamixHOTProperty >> parentFeature [
 	"Relation named: #parentFeature type: #FamixHOTFeature opposite: #schemas"
 
 	<generated>
+	<container>
 	^ parentFeature
 ]
 
@@ -62,6 +63,13 @@ FamixHOTProperty >> parentFeature: anObject [
 
 	<generated>
 	parentFeature := anObject
+]
+
+{ #category : #navigation }
+FamixHOTProperty >> parentFeatureGroup [
+	<generated>
+	<navigation: 'ParentFeature'>
+	^ MooseGroup with: self parentFeature
 ]
 
 { #category : #accessing }

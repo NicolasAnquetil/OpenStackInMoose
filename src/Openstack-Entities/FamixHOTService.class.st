@@ -4,9 +4,9 @@ Class {
 	#traits : 'FamixTNamedEntity + TEntityMetaLevelDependency',
 	#classTraits : 'FamixTNamedEntity classTrait + TEntityMetaLevelDependency classTrait',
 	#instVars : [
+		'#subServices => FMMany type: #FamixHOTService opposite: #parentService',
 		'#parentService => FMOne type: #FamixHOTService opposite: #subServices',
-		'#resourceTypes => FMMany type: #FamixHOTResourceType opposite: #parentService',
-		'#subServices => FMMany type: #FamixHOTService opposite: #parentService'
+		'#resourceTypes => FMMany type: #FamixHOTResourceType opposite: #parentService'
 	],
 	#category : #'Openstack-Entities-Entities'
 }

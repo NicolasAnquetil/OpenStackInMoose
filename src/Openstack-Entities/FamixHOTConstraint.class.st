@@ -2,8 +2,8 @@ Class {
 	#name : #FamixHOTConstraint,
 	#superclass : #FamixHOTEntity,
 	#instVars : [
-		'#constrainedFeature => FMOne type: #FamixHOTFeature opposite: #constraints',
-		'#description => FMProperty'
+		'#description => FMProperty',
+		'#constrainedFeature => FMOne type: #FamixHOTFeature opposite: #constraints'
 	],
 	#category : #'Openstack-Entities-Entities'
 }
