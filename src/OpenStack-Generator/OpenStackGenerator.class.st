@@ -130,6 +130,6 @@ OpenStackGenerator >> defineRelations [
 
 	(feature property: #supportStatus) - (supportStatus property: #feature).
 	(feature property: #constraints) -* (constraint property: #constrainedFeature).
-	(feature property: #resourceType) *- (resourceType property: #features).
-	(feature property: #schemas) -* (property property: #parentFeature).
+	(feature property: #resourceType) *- (resourceType property: #referringFeatures).
+	(feature property: #schemas) <>-* (property property: #parentFeature).
 ]
