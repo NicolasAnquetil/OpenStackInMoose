@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'#constraints => FMMany type: #FamixHOTConstraint opposite: #constrainedFeature',
 		'#description => FMProperty',
-		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #features',
+		'#resourceType => FMOne type: #FamixHOTResourceType opposite: #referringFeatures',
 		'#schemas => FMMany type: #FamixHOTProperty opposite: #parentFeature',
 		'#supportStatus => FMOne type: #FamixHOTSupportStatus opposite: #feature',
 		'#type => FMProperty'
@@ -74,7 +74,7 @@ FamixHOTFeature >> privateGetResourceTypeDependencies [
 		]) asSet.
 	self resourceType
 		ifNotNil: [ :res | depFromSchemas
-			add: (MooseQueryDependencyAssociation newFrom: self to: res) ].
+			add: (MooseQueryDependencyAssociation newFrom: res to: self) ].
 	^depFromSchemas 
 
 ]

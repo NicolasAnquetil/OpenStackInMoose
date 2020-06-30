@@ -7,9 +7,9 @@ Class {
 		'#abstract => FMProperty',
 		'#attributes => FMMany type: #FamixHOTAttribute opposite: #parentResourceType',
 		'#description => FMProperty',
-		'#features => FMMany type: #FamixHOTFeature opposite: #resourceType',
 		'#parentService => FMOne type: #FamixHOTService opposite: #resourceTypes',
 		'#properties => FMMany type: #FamixHOTProperty opposite: #parentResourceType',
+		'#referringFeatures',
 		'#subResourceType => FMMany type: #FamixHOTResourceType opposite: #superResourceType',
 		'#superResourceType => FMOne type: #FamixHOTResourceType opposite: #subResourceType',
 		'#supportStatus => FMMany type: #FamixHOTSupportStatus opposite: #resourceType'
@@ -159,6 +159,13 @@ FamixHOTResourceType >> printOn: aStream [
 		yourself
 ]
 
+{ #category : #'query dependencies' }
+FamixHOTResourceType >> privateGetFeatureDependencies [
+	^self referringFeatures
+		collect: [ :f | MooseQueryDependencyAssociation newFrom: self to: f ].
+
+]
+
 { #category : #accessing }
 FamixHOTResourceType >> properties [
 	"Relation named: #properties type: #FamixHOTProperty opposite: #parentResourceType"
@@ -183,7 +190,27 @@ FamixHOTResourceType >> propertiesGroup [
 ]
 
 { #category : #'query dependencies' }
-FamixHOTResourceType >> queryOutgoingDependencies [
+FamixHOTResourceType >> queryIncomingDependencies [
+	| aCollection |
+	aCollection := self queryLocalIncomingDependencies.
+
+	self superResourceType ifNotNil: [ :sup |
+		aCollection addAll: sup queryIncomingDependencies ].
+
+	^ aCollection
+]
+
+{ #category : #'query dependencies' }
+FamixHOTResourceType >> queryLocalIncomingDependencies [
+	"computing dependencies 'manually' "
+
+	^self createOutgoingQueryResultWith:
+		self privateGetFeatureDependencies
+
+]
+
+{ #category : #'query dependencies' }
+FamixHOTResourceType >> queryLocalOutgoingDependencies [
 	"computing dependencies 'manually' "
 
 	^self createOutgoingQueryResultWith:
@@ -191,6 +218,24 @@ FamixHOTResourceType >> queryOutgoingDependencies [
 	
 	
 		
+]
+
+{ #category : #'query dependencies' }
+FamixHOTResourceType >> queryOutgoingDependencies [
+	| aCollection |
+	aCollection := self queryLocalOutgoingDependencies.
+
+	self subResourceType do: [ :sub |
+		aCollection addAll: sub queryOutgoingDependencies ].
+
+	^ aCollection
+]
+
+{ #category : #accessing }
+FamixHOTResourceType >> referringFeatures: anObject [
+
+	<generated>
+	referringFeatures value: anObject
 ]
 
 { #category : #accessing }
