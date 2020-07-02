@@ -71,6 +71,30 @@ HOTDemo >> graphDepOn: services [
 	^bldr view
 ]
 
+{ #category : #importing }
+HOTDemo >> importModel: aFileName [
+	model :=	(
+		('/home/anquetil/Documents/RMod/Rech/OpenStack/MSEs/' , aFileName , '.mse')
+			asFileReference
+		readStreamDo: [ :st |
+			(FamixHOTModel importFromMSEStream: st) name: aFileName ; yourself ]).
+]
+
+{ #category : #importing }
+HOTDemo >> importModelAll [
+	self importModel: 'all_HOT_resource_types'
+]
+
+{ #category : #importing }
+HOTDemo >> importModelSchemasModified [
+	self importModel: 'all_HOT_resource_types-schemas-modified'
+]
+
+{ #category : #importing }
+HOTDemo >> importModelSchemasNotModified [
+	self importModel: 'all_HOT_resource_types-schemas-not-modified'
+]
+
 { #category : #accessing }
 HOTDemo >> leafServices [
 	^leafServices 
