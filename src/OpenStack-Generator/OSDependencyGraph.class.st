@@ -1,25 +1,14 @@
 "
-Showing a dependencyGraph between services
+Showing a dependencyGraph between elements
 "
 Class {
 	#name : #OSDependencyGraph,
 	#superclass : #Object,
 	#instVars : [
-		'elements',
-		'dependencies'
+		'elements'
 	],
 	#category : #'OpenStack-Generator'
 }
-
-{ #category : #accessing }
-OSDependencyGraph >> dependencies [
-	^ dependencies
-]
-
-{ #category : #accessing }
-OSDependencyGraph >> dependencies: anObject [
-	dependencies := anObject
-]
 
 { #category : #drawing }
 OSDependencyGraph >> draw [

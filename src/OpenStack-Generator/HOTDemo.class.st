@@ -13,6 +13,28 @@ Class {
 	#category : #'OpenStack-Generator'
 }
 
+{ #category : #private }
+HOTDemo >> checkDependenciesFor: elements [
+	| error |
+	error := OrderedCollection new.
+	elements do: [ :e |
+		(e queryOutgoingDependencies atScope: e class)
+			do: [ :opposite |
+				((opposite queryIncomingDependencies atScope: e class) includes: e)
+					ifFalse: [ error add: e -> opposite ]
+			]
+	].
+	elements do: [ :e |
+		(e queryIncomingDependencies atScope: e class)
+			do: [ :opposite |
+				((opposite queryOutgoingDependencies atScope: e class) includes: e)
+					ifFalse: [ error add: opposite -> e]
+			]
+	].
+	^error
+
+]
+
 { #category : #api }
 HOTDemo >> clearTags [
 	model tags copy do: [ :t | t remove ]
