@@ -1,3 +1,6 @@
+"
+Re-implementing a crude DSM in Roassal3
+"
 Class {
 	#name : #OSDsm3,
 	#superclass : #Object,
@@ -50,7 +53,7 @@ OSDsm3 >> colorX: x Y: y [
 	^Color blue				
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #drawing }
 OSDsm3 >> draw [
 	| canvas shapes |
 	canvas := RSCanvas new.

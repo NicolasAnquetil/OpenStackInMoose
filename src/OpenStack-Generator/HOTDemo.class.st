@@ -57,10 +57,13 @@ HOTDemo >> cycles [
 
 { #category : #api }
 HOTDemo >> dsm [
-	dsm := OSDsm2 new.
+	"dsm := OSDsm2 new.
 	dsm objects: leafServices.
 	dsm dependency: [ :s | s queryOutgoingDependencies atScope: FamixHOTService].
-	^dsm
+	^dsm"
+	^OSDsm3 new
+		elements: (self leafServices) ;
+		draw
 ]
 
 { #category : #searching }

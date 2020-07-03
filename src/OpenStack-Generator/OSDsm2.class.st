@@ -30,32 +30,6 @@ OSDsm2 >> boxPopup [
 ]
 
 { #category : #'as yet unclassified' }
-OSDsm2 >> boxPopup: assoc [
-	^ 'blah' -> assoc key
-
-"	|sourceService targetService resourceDependencies|
-	sourceService := assoc key.
-	targetService := assoc value.
-	resourceDependencies := (sourceService queryOutgoingDependencies
-		select: [ :dep | ((dep to atScope: FamixHOTService) includes: targetService) ]
-		thenCollect: [ :dep | dep from -> dep to ])
-			asSet.
-	^String streamContents: [ :st |
-		sourceService printOn: st.
-		st nextPutAll: '->'.
-		targetService printOn: st.
-			resourceDependencies
-			do: [ :dep |
-				st
-					nextPut: (Character cr) ;
-					nextPutAll: '   '.
-				dep key printOn: st.
-				st nextPutAll: '->'.
-				dep value printOn: st. ].
-		]"
-]
-
-{ #category : #'as yet unclassified' }
 OSDsm2 >> colorX: x Y: y [
 	| tags |
 	(x = y)
