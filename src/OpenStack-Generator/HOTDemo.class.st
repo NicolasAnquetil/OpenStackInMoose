@@ -1,3 +1,6 @@
+"
+A collection of methods to manipulate a HOT model
+"
 Class {
 	#name : #HOTDemo,
 	#superclass : #Object,
@@ -29,16 +32,26 @@ HOTDemo >> colorTheme [
 ]
 
 { #category : #api }
-HOTDemo >> computeCycles [
+HOTDemo >> computeCycles: elements [
 	tarjan := MalTarjan new.
-	tarjan nodes: leafServices.
-	tarjan edges: leafServices from: #yourself toAll: [ :s | s queryOutgoingDependencies atScope: FamixHOTService].
+	tarjan nodes: elements.
+	tarjan edges: elements from: #yourself toAll: [ :s | s queryOutgoingDependencies atScope: (s class)].
 	tarjan run.
 ]
 
 { #category : #api }
+HOTDemo >> computeResourceCycles [
+	self computeCycles: (self model allWithType: FamixHOTResourceType).
+
+]
+
+{ #category : #api }
+HOTDemo >> computeServiceCycles [
+	self computeCycles: leafServices
+]
+
+{ #category : #api }
 HOTDemo >> cycles [
-	tarjan ifNil: [ self computeCycles ].
 	^tarjan circuits
 ]
 
