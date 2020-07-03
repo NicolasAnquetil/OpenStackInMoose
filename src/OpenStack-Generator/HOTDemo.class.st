@@ -118,6 +118,12 @@ HOTDemo >> lonelyResources [
 			[ rt queryIncomingDependencies withoutSelfLoops isEmpty ] ]
 ]
 
+{ #category : #api }
+HOTDemo >> lonelyResourcesReport [
+	^(self lonelyResources
+	sorted: [ :a :b | a mooseName < b mooseName ]) toStringPrintingBlock: [ :st :e | st nextPutAll: (e mooseName) ; cr ] .
+]
+
 { #category : #accessing }
 HOTDemo >> model [
 	^model
