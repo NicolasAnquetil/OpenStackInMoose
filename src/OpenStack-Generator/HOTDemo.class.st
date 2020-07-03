@@ -72,19 +72,13 @@ HOTDemo >> entity: aClass named: aString [
 ]
 
 { #category : #api }
-HOTDemo >> graphDepOn: services [
-
-	| bldr |
-	bldr := RTMondrian new.
-	bldr shape box color: [:e | e tags isEmpty ifTrue: [ Color gray ] ifFalse: [ e tags anyOne color ]  ].
-	bldr
-		nodes: services.
-
-	bldr shape arrowedLine color: Color black.
-	bldr edges connectToAll: [:s | s queryOutgoingDependencies atScope: FamixHOTService].
-	bldr layout force.
-	bldr build.
-	^bldr view
+HOTDemo >> graphDep [
+	| elts |
+	elts := self leafServices
+		reject: [:s | s mooseName beginsWith: 'AWS' ].
+	^OSDependencyGraph new
+		elements: elts ;
+		draw
 ]
 
 { #category : #importing }
