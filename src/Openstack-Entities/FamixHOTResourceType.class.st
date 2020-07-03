@@ -182,9 +182,9 @@ FamixHOTResourceType >> queryIncomingDependencies [
 	| aCollection |
 	aCollection := self queryLocalIncomingDependencies.
 
-	self superResourceType ifNotNil: [ :sup |
-		aCollection addAll: sup queryIncomingDependencies ].
-
+	self subResourceType do: [ :sub |
+		aCollection add: (MooseQueryDependencyAssociation newFrom: self to: sub) ].
+	
 	^ aCollection
 ]
 
@@ -199,7 +199,7 @@ FamixHOTResourceType >> queryLocalIncomingDependencies [
 
 { #category : #'query dependencies' }
 FamixHOTResourceType >> queryLocalOutgoingDependencies [
-	"computing dependencies 'manually' "
+	"computing dependencies from Properties "
 
 	^self createOutgoingQueryResultWith:
 		((properties , attributes) flatCollect: #queryOutgoingDependencies)
@@ -211,8 +211,8 @@ FamixHOTResourceType >> queryOutgoingDependencies [
 	| aCollection |
 	aCollection := self queryLocalOutgoingDependencies.
 
-	self subResourceType do: [ :sub |
-		aCollection addAll: sub queryOutgoingDependencies ].
+	self superResourceType ifNotNil: [ :sup |
+		aCollection add: (MooseQueryDependencyAssociation newFrom: self to: sup) ].
 
 	^ aCollection
 ]

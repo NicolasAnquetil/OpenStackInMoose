@@ -67,6 +67,7 @@ FamixHOTFeature >> description: anObject [
 
 { #category : #'query dependencies' }
 FamixHOTFeature >> privateGetResourceTypeDependencies [
+	"getting dependencies from the Feature to a ResourceType"
 	| depFromSchemas |
 	depFromSchemas := (self schemas
 		flatCollect: [ :each |

@@ -72,7 +72,16 @@ HOTDemo >> entity: aClass named: aString [
 ]
 
 { #category : #api }
-HOTDemo >> graphDep [
+HOTDemo >> graphDepResources [
+	| elts |
+	elts := (model allWithType: FamixHOTResourceType) \ self lonelyResources.
+	^OSDependencyGraph new
+		elements: elts ;
+		draw
+]
+
+{ #category : #api }
+HOTDemo >> graphDepServices [
 	| elts |
 	elts := self leafServices
 		reject: [:s | s mooseName beginsWith: 'AWS' ].
@@ -150,9 +159,28 @@ HOTDemo >> tagCycles [
 	| i |
 	i := 1.
 	self cycles do: [ :cycle || tag |
-		tag := model tagNamed: 'cycle-' , i asString.
-		tag color: (self colorAt: i).
-		cycle do: [ :e | e model tagWith: tag ].
+		self
+			tagElements: cycle
+			with: (self
+				tagNamed: ('cycle-' , i asString)
+				color: (self colorAt: i)).
 		i := i + 1
 	]
+]
+
+{ #category : #api }
+HOTDemo >> tagElements: elements with: tag [
+	elements do: [ :e | e model tagWith: tag ].
+
+]
+
+{ #category : #private }
+HOTDemo >> tagNamed: aString color: aColorOrSymbol [
+	^(model tagNamed: aString)
+		color: (aColorOrSymbol isColor
+			ifTrue: #yourself
+			ifFalse: [Color perform: aColorOrSymbol]) ;
+		yourself.
+	
+
 ]
