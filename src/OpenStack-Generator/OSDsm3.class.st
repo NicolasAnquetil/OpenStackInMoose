@@ -46,11 +46,11 @@ OSDsm3 >> colorX: x Y: y [
 	(x = y)
 		ifTrue: [ ^Color darkGray ].
 	((dependencies at: x) includes: y)
-		ifFalse: [ ^Color lightGray lighter ].
+		ifFalse: [ ^Color veryLightGray lighter ].
 	tags := x tags intersection: y tags.
 	tags
 		ifNotEmpty: [ ^ tags anyOne color ].
-	^Color blue				
+	^Color lightBlue				
 ]
 
 { #category : #drawing }
@@ -77,11 +77,13 @@ OSDsm3 >> draw [
 
 { #category : #'as yet unclassified' }
 OSDsm3 >> elements: aCollection [
-	elements := aCollection.
 	dependencies := Dictionary new: aCollection size.
 	aCollection do: [ :e |
 		dependencies
 			at: e
-			put: (e queryOutgoingDependencies atScope: FamixHOTService) withoutSelfLoops
+			put: (e queryOutgoingDependencies atScope: e class) withoutSelfLoops
+	].
+	elements := aCollection sorted: [ :a :b |
+		(dependencies at: a) size < (dependencies at: b) size
 	]
 ]
