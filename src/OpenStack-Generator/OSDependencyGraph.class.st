@@ -11,13 +11,23 @@ Class {
 }
 
 { #category : #drawing }
+OSDependencyGraph >> defaultEdgeCharge [
+	^-500
+]
+
+{ #category : #drawing }
+OSDependencyGraph >> defaultEdgeLength [
+	^150
+]
+
+{ #category : #drawing }
 OSDependencyGraph >> draw [
 	| canvas shapes stepping edges  layout |
 	canvas := RSCanvas new.
 	shapes := elements collect: [ :e || box |
 		box := RSEllipse new.
 		box
-			size: 5;
+			size: 10;
 			draggable;
 			model: e.
 		box @ (RSLabeled new text: [:elt | elt mooseName] ; yourself).
@@ -27,6 +37,7 @@ OSDependencyGraph >> draw [
 		box
 	].
 	edges := RSEdgeBuilder arrowedLine
+		color: (Color lightGray) ;
 		shapes: shapes;
 		connectToAll: [ :e | e queryOutgoingDependencies atScope: e class ].
 	canvas
@@ -35,8 +46,8 @@ OSDependencyGraph >> draw [
 	stepping := RSForceLayoutStepping new.
 	
 	(layout := stepping layout)
-		length: 80;
-		charge: -300.
+		length: self defaultEdgeLength;
+		charge: self defaultEdgeCharge.
 	canvas @ stepping.
 	canvas @ RSCanvasController.
 	

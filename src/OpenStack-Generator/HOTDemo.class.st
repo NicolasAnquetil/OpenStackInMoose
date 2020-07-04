@@ -200,7 +200,7 @@ HOTDemo >> tagElements: elements with: tag [
 HOTDemo >> tagNamed: aString color: aColorOrSymbol [
 	^(model tagNamed: aString)
 		color: (aColorOrSymbol isColor
-			ifTrue: #yourself
+			ifTrue: [ aColorOrSymbol ]
 			ifFalse: [Color perform: aColorOrSymbol]) ;
 		yourself.
 	
