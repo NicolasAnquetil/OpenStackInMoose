@@ -227,3 +227,13 @@ HOTDemo >> tagNamed: aString color: aColorOrSymbol [
 	
 
 ]
+
+{ #category : #api }
+HOTDemo >> utilityServices [
+	^(model allWithType: FamixHOTService)
+		collect: [ :s |
+			(s resourceTypes)
+			ifEmpty: [ s -> 0 ]
+			ifNotEmpty: [:members | s -> ((self lonelyElements: members) size / members size)]
+		]
+]
