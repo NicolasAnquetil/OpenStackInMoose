@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'elements'
 	],
-	#category : #'OpenStack-Generator'
+	#category : #'OpenStack-Analysis'
 }
 
 { #category : #drawing }

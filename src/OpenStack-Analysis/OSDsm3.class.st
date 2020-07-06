@@ -8,7 +8,7 @@ Class {
 		'elements',
 		'dependencies'
 	],
-	#category : #'OpenStack-Generator'
+	#category : #'OpenStack-Analysis'
 }
 
 { #category : #'as yet unclassified' }

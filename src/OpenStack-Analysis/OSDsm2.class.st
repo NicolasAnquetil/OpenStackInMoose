@@ -1,7 +1,7 @@
 Class {
 	#name : #OSDsm2,
 	#superclass : #RTDSM,
-	#category : #'OpenStack-Generator'
+	#category : #'OpenStack-Analysis'
 }
 
 { #category : #'as yet unclassified' }

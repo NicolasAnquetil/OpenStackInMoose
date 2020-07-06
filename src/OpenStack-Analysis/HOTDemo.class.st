@@ -10,7 +10,7 @@ Class {
 		'model',
 		'tarjan'
 	],
-	#category : #'OpenStack-Generator'
+	#category : #'OpenStack-Analysis'
 }
 
 { #category : #private }
@@ -35,12 +35,12 @@ HOTDemo >> checkDependenciesFor: elements [
 
 ]
 
-{ #category : #api }
+{ #category : #tags }
 HOTDemo >> clearTags [
 	model tags copy do: [ :t | t remove ]
 ]
 
-{ #category : #private }
+{ #category : #visualization }
 HOTDemo >> colorAt: i [
 	"requires a bit of fidling because indices in Pharo start at 1"
 	| colors |
@@ -48,12 +48,12 @@ HOTDemo >> colorAt: i [
 	^ colors at: (((i - 1) \\ colors size) + 1)
 ]
 
-{ #category : #private }
+{ #category : #visualization }
 HOTDemo >> colorTheme [
 	^{Color red . Color green . Color purple . Color orange . Color yellow . Color brown }
 ]
 
-{ #category : #api }
+{ #category : #cycles }
 HOTDemo >> computeCycles: elements [
 	tarjan := MalTarjan new.
 	tarjan nodes: elements.
@@ -61,23 +61,23 @@ HOTDemo >> computeCycles: elements [
 	tarjan run.
 ]
 
-{ #category : #api }
+{ #category : #cycles }
 HOTDemo >> computeResourceCycles [
 	self computeCycles: (self model allWithType: FamixHOTResourceType).
 
 ]
 
-{ #category : #api }
+{ #category : #cycles }
 HOTDemo >> computeServiceCycles [
 	self computeCycles: leafServices
 ]
 
-{ #category : #api }
+{ #category : #cycles }
 HOTDemo >> cycles [
 	^tarjan circuits
 ]
 
-{ #category : #api }
+{ #category : #visualization }
 HOTDemo >> dsmResources [
 	"dsm := OSDsm2 new.
 	dsm objects: leafServices.
@@ -88,7 +88,7 @@ HOTDemo >> dsmResources [
 		draw
 ]
 
-{ #category : #api }
+{ #category : #visualization }
 HOTDemo >> dsmServices [
 	"dsm := OSDsm2 new.
 	dsm objects: leafServices.
@@ -104,7 +104,7 @@ HOTDemo >> entity: aClass named: aString [
 	^(model allWithType: aClass) detect: [ :s | s name = aString ]
 ]
 
-{ #category : #api }
+{ #category : #visualization }
 HOTDemo >> graphDepResources [
 	| elts |
 	elts := (model allWithType: FamixHOTResourceType) \ self lonelyResources.
@@ -113,7 +113,7 @@ HOTDemo >> graphDepResources [
 		draw
 ]
 
-{ #category : #api }
+{ #category : #visualization }
 HOTDemo >> graphDepServices [
 	| elts |
 	elts := self leafServices
@@ -153,17 +153,27 @@ HOTDemo >> leafServices [
 ]
 
 { #category : #api }
+HOTDemo >> lonelyElements: aCollection [
+	^aCollection 
+		select: [ :e |
+			e queryOutgoingDependencies withoutSelfLoops isEmpty and:
+			[ e queryIncomingDependencies withoutSelfLoops isEmpty ] ]
+]
+
+{ #category : #api }
 HOTDemo >> lonelyResources [
-	^(model allWithType: FamixHOTResourceType)
-		select: [ :rt |
-			rt queryOutgoingDependencies withoutSelfLoops isEmpty and:
-			[ rt queryIncomingDependencies withoutSelfLoops isEmpty ] ]
+	^self lonelyElements: (model allWithType: FamixHOTResourceType)
 ]
 
 { #category : #api }
 HOTDemo >> lonelyResourcesReport [
 	^(self lonelyResources
 	sorted: [ :a :b | a mooseName < b mooseName ]) toStringPrintingBlock: [ :st :e | st nextPutAll: (e mooseName) ; cr ] .
+]
+
+{ #category : #api }
+HOTDemo >> lonelyServices [
+	^self lonelyElements: (model allWithType: FamixHOTService)
 ]
 
 { #category : #accessing }
@@ -187,7 +197,7 @@ HOTDemo >> serviceNamed: aString [
 	^self entity: FamixHOTService named: aString
 ]
 
-{ #category : #api }
+{ #category : #tags }
 HOTDemo >> tagCycles [
 	| i |
 	i := 1.
@@ -201,13 +211,13 @@ HOTDemo >> tagCycles [
 	]
 ]
 
-{ #category : #api }
+{ #category : #tags }
 HOTDemo >> tagElements: elements with: tag [
 	elements do: [ :e | e model tagWith: tag ].
 
 ]
 
-{ #category : #private }
+{ #category : #tags }
 HOTDemo >> tagNamed: aString color: aColorOrSymbol [
 	^(model tagNamed: aString)
 		color: (aColorOrSymbol isColor
