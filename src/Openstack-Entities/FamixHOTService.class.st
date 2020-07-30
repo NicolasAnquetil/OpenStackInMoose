@@ -73,8 +73,19 @@ FamixHOTService >> printOn: aStream [
 ]
 
 { #category : #'query dependencies' }
+FamixHOTService >> queryIncomingDependencies [
+	| dependings |
+	dependings := OrderedCollection new.
+	self childrenSelectors do: [ :childrenSelector | 
+		(self perform: childrenSelector)
+			ifNotNil: [ :children | 
+				children do: [ :child | dependings addAll: child queryIncomingDependencies ] ] ].
+	^ self createIncomingQueryResultWith: dependings
+
+]
+
+{ #category : #'query dependencies' }
 FamixHOTService >> queryOutgoingDependencies [
-	"Associations + typeDeclarations"
 	| dependents |
 	dependents := OrderedCollection new.
 	self childrenSelectors do: [ :childrenSelector | 

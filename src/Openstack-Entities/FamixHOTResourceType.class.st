@@ -150,7 +150,7 @@ FamixHOTResourceType >> printOn: aStream [
 { #category : #'query dependencies' }
 FamixHOTResourceType >> privateGetFeatureDependencies [
 	^self referringFeatures
-		collect: [ :f | MooseQueryDependencyAssociation newFrom: self to: f ].
+		collect: [ :f | MooseQueryDependencyAssociation newFrom: f to: self ].
 
 ]
 
@@ -183,7 +183,7 @@ FamixHOTResourceType >> queryIncomingDependencies [
 	aCollection := self queryLocalIncomingDependencies.
 
 	self subResourceType do: [ :sub |
-		aCollection add: (MooseQueryDependencyAssociation newFrom: self to: sub) ].
+		aCollection add: (MooseQueryDependencyAssociation newFrom: sub to: self) ].
 	
 	^ aCollection
 ]
@@ -192,14 +192,14 @@ FamixHOTResourceType >> queryIncomingDependencies [
 FamixHOTResourceType >> queryLocalIncomingDependencies [
 	"computing dependencies 'manually' "
 
-	^self createOutgoingQueryResultWith:
+	^self createIncomingQueryResultWith:
 		self privateGetFeatureDependencies
 
 ]
 
 { #category : #'query dependencies' }
 FamixHOTResourceType >> queryLocalOutgoingDependencies [
-	"computing dependencies from Properties "
+	"computing dependencies 'manually' "
 
 	^self createOutgoingQueryResultWith:
 		((properties , attributes) flatCollect: #queryOutgoingDependencies)
