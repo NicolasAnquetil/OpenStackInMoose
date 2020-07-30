@@ -189,7 +189,10 @@ HOTDemo >> importModelSchemasNotModified [
 
 { #category : #accessing }
 HOTDemo >> leafServices [
-	^leafServices 
+	self flag: 'La variable d ́instance leafServices contient encore le cache qui est obsolete et produit le bug'.
+
+	^(self model allWithType: FamixHOTService)
+		select: [ :s | s subServices isEmpty ]
 ]
 
 { #category : #api }
