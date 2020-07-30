@@ -77,6 +77,37 @@ HOTDemo >> cycles [
 	^tarjan circuits
 ]
 
+{ #category : #api }
+HOTDemo >> dependencyWeight: anEntity with: anotherEntity [
+	| outCollec inCollec |
+	outCollec := 
+		(anEntity queryOutgoingDependencies collect: #to)
+		 flatCollect: [ :o | o atScope: anotherEntity class].
+	inCollec := 
+		(anEntity queryIncomingDependencies collect: #from)
+			flatCollect: [ :o | o atScope: anotherEntity class ].
+		
+	^(outCollec select: [ :opp | opp = anotherEntity ]) size + (inCollec select: [ :opp | opp = anotherEntity ]) size
+]
+
+{ #category : #api }
+HOTDemo >> dependencyWeightBetweenServices [
+	^self dependencyWeightForPairs: self leafServices.
+]
+
+{ #category : #api }
+HOTDemo >> dependencyWeightForPairs: aCollection [
+	^((aCollection  flatCollect: [ :a |
+	 	aCollection collect: [ :b |
+			(a mooseName < b mooseName)
+				ifTrue: [{(self dependencyWeight: a with: b) . a . b}]
+				ifFalse: [{ 0 .a . b} ] ] ])
+		reject: [ :e | e first = 0 ])
+		asOrderedCollection 
+		sort: [ :e1 :e2 | e1 first < e2 first ]
+
+]
+
 { #category : #visualization }
 HOTDemo >> dsmResources [
 	"dsm := OSDsm2 new.
