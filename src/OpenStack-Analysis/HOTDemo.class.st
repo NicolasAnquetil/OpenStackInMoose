@@ -105,6 +105,46 @@ HOTDemo >> entity: aClass named: aString [
 ]
 
 { #category : #visualization }
+HOTDemo >> fanDistribution: direction [
+	| b ds sortedResources |
+	sortedResources :=
+		(((model allWithType: FamixHOTResourceType)
+			collect: [:r | (r perform: direction) -> r ]) 
+			asOrderedCollection 
+			sort: [ :a1 :a2 | a1 key < a2 key ])
+			collect: #value.
+	
+	b := RTGrapher new.
+
+	"We define the size of the charting area"
+	b extent: 500 @ 100.
+	ds := RTData new.
+
+	ds points: sortedResources .
+
+	"The height of a bar will be the number of methods (defined in the instance side)"
+	ds y: [ :c | (c perform: direction) ].
+
+	ds barShape
+		color: Color blue;
+		width: 5.
+	b add: ds.
+	b axisX.
+	b axisYWithNumberOfTicks: 4.
+	^ b
+]
+
+{ #category : #visualization }
+HOTDemo >> fanInDistribution [
+	^self fanDistribution: #fanIn
+]
+
+{ #category : #visualization }
+HOTDemo >> fanOutDistribution [
+	^self fanDistribution: #fanOut
+]
+
+{ #category : #visualization }
 HOTDemo >> graphDepResources [
 	| elts |
 	elts := (model allWithType: FamixHOTResourceType) \ self lonelyResources.

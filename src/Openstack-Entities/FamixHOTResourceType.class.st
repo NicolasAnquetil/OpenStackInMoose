@@ -107,6 +107,16 @@ FamixHOTResourceType >> description: anObject [
 	description := anObject
 ]
 
+{ #category : #metrics }
+FamixHOTResourceType >> fanIn [
+	^self queryIncomingDependencies opposites asSet size
+]
+
+{ #category : #metrics }
+FamixHOTResourceType >> fanOut [
+	^self queryOutgoingDependencies opposites asSet size
+]
+
 { #category : #printing }
 FamixHOTResourceType >> mooseNameOn: aStream [
 	self parentService
